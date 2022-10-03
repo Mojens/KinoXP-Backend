@@ -8,6 +8,10 @@ import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
 import com.example.kinoxpbackend.repository.TheaterRepository;
+import com.example.kinoxpbackend.entity.Employee;
+import com.example.kinoxpbackend.entity.Shift;
+import com.example.kinoxpbackend.repository.EmployeeRepository;
+import com.example.kinoxpbackend.repository.ShiftRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+
 
 @Controller
 public class Setup implements ApplicationRunner {
@@ -31,53 +37,59 @@ public class Setup implements ApplicationRunner {
     this.screeningRepository = screeningRepository;
     this.theaterRepository = theaterRepository;
     this.seatRepository = seatRepository;
-  }
+    EmployeeRepository employeeRepository;
+    ShiftRepository shiftRepository;
 
-  @Override
-  public void run(ApplicationArguments args) throws Exception {
+  public Setup(EmployeeRepository employeeRepository, ShiftRepository shiftRepository) {
+      this.employeeRepository = employeeRepository;
+      this.shiftRepository = shiftRepository;
+    }
+
+    @Override
+    public void run (ApplicationArguments args) throws Exception {
 
       // Add movie
-    Movie movie = new Movie("Batman Begins","Best movie",5, "Action",150,15,100, LocalDate.of(2022,10,10),LocalDate.of(2022,12,26));
-    Movie movie2 = new Movie("Batman Dark knight","Best movie",5, "Action",150,15,100,LocalDate.of(2022,10,10),LocalDate.of(2022,12,26));
-    Movie movie3 = new Movie("Batman Rises","Best movie",5, "Action",150,15,100,LocalDate.of(2022,10,10),LocalDate.of(2022,12,26));
-    Movie movie4 = new Movie("The Batman","Best movie",5, "Action",150,15,100,LocalDate.of(2022,10,10),LocalDate.of(2022,12,26));
+      Movie movie = new Movie("Batman Begins", "Best movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie2 = new Movie("Batman Dark knight", "Best movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie3 = new Movie("Batman Rises", "Best movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie4 = new Movie("The Batman", "Best movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
 
-    movieRepository.save(movie);
-    movieRepository.save(movie2);
-    movieRepository.save(movie3);
-    movieRepository.save(movie4);
-
-
-    // add Theater
-    Theater theater = new Theater( 1);
-    Theater theater2 = new Theater( 2);
+      movieRepository.save(movie);
+      movieRepository.save(movie2);
+      movieRepository.save(movie3);
+      movieRepository.save(movie4);
 
 
-    theaterRepository.save(theater);
-    theaterRepository.save(theater2);
+      // add Theater
+      Theater theater = new Theater(1);
+      Theater theater2 = new Theater(2);
 
-    // Seats
+
+      theaterRepository.save(theater);
+      theaterRepository.save(theater2);
+
+      // Seats
 
 
-    List<Seatings> seatsTheater1 = new ArrayList<Seatings>();
-    String[] rows = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
-    for (int i = 0; i < 20; i++) {
-      String row = rows[i];
-      for (int j = 1; j <= 12; j++) {
-        Seatings tempSeat = new Seatings(row, j, theater);
-        seatsTheater1.add(tempSeat);
+      List<Seatings> seatsTheater1 = new ArrayList<Seatings>();
+      String[] rows = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
+      for (int i = 0; i < 20; i++) {
+        String row = rows[i];
+        for (int j = 1; j <= 12; j++) {
+          Seatings tempSeat = new Seatings(row, j, theater);
+          seatsTheater1.add(tempSeat);
+        }
       }
-    }
 
-    List<Seatings> seatsTheater2 = new ArrayList<Seatings>();
-    for (int i = 0; i < 25; i++) {
-      String row = rows[i];
-      for (int j = 1; j <= 16; j++) {
-        Seatings tempSeat = new Seatings(row, j, theater2);
-        seatsTheater1.add(tempSeat);
+      List<Seatings> seatsTheater2 = new ArrayList<Seatings>();
+      for (int i = 0; i < 25; i++) {
+        String row = rows[i];
+        for (int j = 1; j <= 16; j++) {
+          Seatings tempSeat = new Seatings(row, j, theater2);
+          seatsTheater1.add(tempSeat);
+        }
       }
-    }
-    seatRepository.saveAll(seatsTheater1);
+      seatRepository.saveAll(seatsTheater1);
 
 /*
     // add screenings
@@ -91,27 +103,50 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening3);
 */
 
-  }
-
-  public static void seatConfig(){
-
-
-
-
-  }
-
-  /*
-    @Override
-    public void run(ApplicationArguments args){
-        ArrayList<Reservation> reservations = new ArrayList<Reservation>(
-                Arrays.asList(
-                        new Reservation("nfnfjd@lddjk.dk","30208430", 1, "123456789"),
-                        new Reservation("nfcdefjd@lddjk.dk","30205430", 5, "12345dew6789"),
-                        new Reservation("frefwe@lddjk.dk","30328430", 4, "dfwedwed")
-                )
-        );
-        reservationRepository.saveAll(reservations);
     }
-    */
 
+    public static void seatConfig () {
+
+      Employee employee1 = Employee.builder()
+          .name("Jens")
+          .type(4)
+          .password("test123")
+          .userName("JensAdmin")
+          .build();
+      Employee employee3 = Employee.builder()
+          .name("Simon")
+          .type(4)
+          .password("test123")
+          .userName("SimonOlsen")
+          .build();
+
+      Employee employee2 = Employee.builder()
+          .name("Mo")
+          .type(1)
+          .password("test321")
+          .userName("MoCasual")
+          .build();
+
+      Shift shift1 = Shift.builder()
+          .startTime(LocalDateTime.now())
+          .endTime(LocalDateTime.now().plusHours(8))
+          .employee(employee1)
+          .build();
+
+      Shift shift2 = Shift.builder()
+          .startTime(LocalDateTime.now().plusHours(8))
+          .endTime(LocalDateTime.now().plusHours(16))
+          .employee(employee2)
+          .build();
+
+      employeeRepository.save(employee1);
+      employeeRepository.save(employee2);
+      employeeRepository.save(employee3);
+
+      shiftRepository.save(shift1);
+      shiftRepository.save(shift2);
+
+
+    }
+  }
 }
