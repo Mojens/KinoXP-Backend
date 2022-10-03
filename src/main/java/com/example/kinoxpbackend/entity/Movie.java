@@ -60,4 +60,16 @@ public class Movie {
         this.showEndDate = showEndDate;
 
     }
+    public Movie( String title, String description, double rating, String genre, double duration, int ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.price = price;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
+
+    }
 }
