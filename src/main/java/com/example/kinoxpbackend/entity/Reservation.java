@@ -37,4 +37,7 @@ public class Reservation {
         this.employeeId = employeeId;
         this.safetyId = safetyId;
     }
+
+    public Reservation() {
+    }
 }
