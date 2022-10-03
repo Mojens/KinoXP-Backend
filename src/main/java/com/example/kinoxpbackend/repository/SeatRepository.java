@@ -1,7 +1,7 @@
 package com.example.kinoxpbackend.repository;
 
-import com.example.kinoxpbackend.entity.Seat;
+import com.example.kinoxpbackend.entity.Seatings;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SeatRepository extends JpaRepository<Seat, Integer> {
+public interface SeatRepository extends JpaRepository<Seatings, Integer> {
 }

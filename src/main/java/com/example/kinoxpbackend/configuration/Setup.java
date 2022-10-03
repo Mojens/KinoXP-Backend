@@ -2,9 +2,6 @@ package com.example.kinoxpbackend.configuration;
 
 
 import com.example.kinoxpbackend.entity.Movie;
-import com.example.kinoxpbackend.entity.Screening;
-import com.example.kinoxpbackend.entity.Seat;
-import com.example.kinoxpbackend.entity.Theater;
 import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
@@ -14,9 +11,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 @Controller
 public class Setup implements ApplicationRunner {
@@ -47,14 +41,41 @@ public class Setup implements ApplicationRunner {
     movieRepository.save(movie3);
     movieRepository.save(movie4);
 
-
+/*
     // add Theater
     Theater theater = new Theater( 1);
     Theater theater2 = new Theater( 2);
 
+
     theaterRepository.save(theater);
     theaterRepository.save(theater2);
+*/
+    // Seats
 
+/*
+    List<Seat> seatsTheater1 = new ArrayList<Seat>();
+    String[] rows = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
+    for (int i = 0; i < 20; i++) {
+      String row = rows[i];
+      for (int j = 1; j <= 12; j++) {
+        Seat tempSeat = new Seat(row, j, theater);
+        seatsTheater1.add(tempSeat);
+      }
+    }
+
+    List<Seat> seatsTheater2 = new ArrayList<Seat>();
+    for (int i = 0; i < 25; i++) {
+      String row = rows[i];
+      for (int j = 1; j <= 16; j++) {
+        Seat tempSeat = new Seat(row, j, theater2);
+        seatsTheater1.add(tempSeat);
+      }
+    }
+    System.out.println(seatsTheater1);
+    System.out.println(seatsTheater2);
+    seatRepository.saveAll(seatsTheater1);
+*/
+/*
     // add screenings
     Screening screening = new Screening(10, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,10,23,10),movie2, theater);
     Screening screening2 = new Screening(40, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie2, theater2);
@@ -64,33 +85,13 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening);
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
-
+*/
 
   }
 
   public static void seatConfig(){
-    Theater theater1 = new Theater(1);
-    Theater theater2 = new Theater(2);
-    ArrayList<Seat> seatsTheater1 = new ArrayList<Seat>();
-    String[] rows = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
-    for (int i = 0; i < 20; i++) {
-      String row = rows[i];
-      for (int j = 1; j <= 12; j++) {
-        Seat tempSeat = new Seat(row, j, theater1);
-        seatsTheater1.add(tempSeat);
-      }
-    }
 
-    ArrayList<Seat> seatsTheater2 = new ArrayList<Seat>();
-    for (int i = 0; i < 25; i++) {
-      String row = rows[i];
-      for (int j = 1; j <= 16; j++) {
-        Seat tempSeat = new Seat(row, j, theater2);
-        seatsTheater2.add(tempSeat);
-      }
-    }
-    System.out.println(seatsTheater1);
-    System.out.println(seatsTheater2);
+
 
 
   }

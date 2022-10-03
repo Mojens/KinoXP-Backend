@@ -1,7 +1,6 @@
 package com.example.kinoxpbackend.dto;
 
-import com.example.kinoxpbackend.entity.Seat;
-import com.example.kinoxpbackend.entity.Theater;
+import com.example.kinoxpbackend.entity.Seatings;
 
 public class SeatResponse {
 
@@ -9,12 +8,10 @@ public class SeatResponse {
     String row;
     int number;
 
-    Theater theater;
+    public SeatResponse(Seatings seatings){
+        this.id = seatings.getId();
+        this.row = seatings.getRowNum();
+        this.number = seatings.getSeatNumber();
 
-    public SeatResponse(Seat seat){
-        this.id = seat.getId();
-        this.row = seat.getRow();
-        this.number = seat.getNumber();
-        this.theater = seat.getTheater();
     }
 }

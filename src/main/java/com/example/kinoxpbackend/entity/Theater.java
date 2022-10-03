@@ -9,26 +9,22 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
-@Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 public class Theater {
     @Id
     private int id;
 
-    @OneToMany(mappedBy = "theater")
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     private List<Screening> screenings = new ArrayList<>();
 
-    @OneToMany(mappedBy = "theater")
-    private List<Seat> seat = new ArrayList<>();
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
+    private List<Seatings> seatings = new ArrayList<>();
 
 
     public Theater() {
     }
 
-    public Theater(int size) {
-        this.id = size;
+    public Theater(int id) {
+        this.id = id;
     }
-
 }
