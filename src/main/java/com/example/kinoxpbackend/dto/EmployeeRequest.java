@@ -11,15 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EmployeeRequest {
 
-  int id;
+  private int id;
 
-  String name;
+  private String name;
 
-  String password;
+  private String password;
 
-  String userName;
+  private String userName;
 
-  int type;
+  private int type;
 
   public static Employee getEmployeeEntity(EmployeeRequest employeeRequest){
     return Employee.builder()
