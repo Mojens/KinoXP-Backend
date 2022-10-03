@@ -1,10 +1,12 @@
 package com.example.kinoxpbackend.service;
 
-import com.example.kinoxpbackend.dto.ReservationRequest;
-import com.example.kinoxpbackend.dto.ReservationResponse;
+import com.example.kinoxpbackend.dto.*;
+import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Reservation;
+import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,14 +25,27 @@ public class ReservationService {
     }
 
     public ReservationResponse findReservationById(int id) {
-        return null;
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
+        return new ReservationResponse(reservation);
     }
 
-    public void deleteReservation(int id) {
+
+
+    public void deleteReservation(@PathVariable int id) {
+        if(!reservationRepository.existsById(id)){
+            throw new RuntimeException("Reservaation not found");
+        }
     }
+
 
     public ReservationResponse addReservation(ReservationRequest body) {
-        return null;
+
+        if(reservationRepository.existsById(body.getId())){
+            throw new RuntimeException("Reservation with this ID allready exist");
+        }
+        Reservation reservation = ReservationRequest.getReservationEntity(body);
+        reservationRepository.save(reservation);
+        return new ReservationResponse(reservation);
     }
 
     public void editReservation(ReservationRequest body, int id) {
