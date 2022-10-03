@@ -4,8 +4,10 @@ import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.MovieResponse;
 import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.repository.MovieRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,8 +62,9 @@ public class MovieService {
     }
 
     // Delete Movie
-    public void deleteMovie(int id) {
-        movieRepository.deleteById(id);
+    public void deleteMovie(@PathVariable int id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie with this ID does not exist"));
+        movieRepository.delete(movie);
     }
 
 
