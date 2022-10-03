@@ -38,6 +38,4 @@ public class Reservation {
         this.safetyId = safetyId;
     }
 
-    public Reservation() {
-    }
 }

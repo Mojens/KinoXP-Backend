@@ -1,5 +1,6 @@
 package com.example.kinoxpbackend;
 
+import com.example.kinoxpbackend.configuration.ReservationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
