@@ -2,15 +2,16 @@ package com.example.kinoxpbackend.configuration;
 
 
 import com.example.kinoxpbackend.entity.Movie;
-import com.example.kinoxpbackend.entity.Screening;
-import com.example.kinoxpbackend.entity.Seatings;
-import com.example.kinoxpbackend.entity.Theater;
 import com.example.kinoxpbackend.entity.Seatings;
 import com.example.kinoxpbackend.entity.Theater;
 import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
 import com.example.kinoxpbackend.repository.TheaterRepository;
+import com.example.kinoxpbackend.entity.Employee;
+import com.example.kinoxpbackend.entity.Shift;
+import com.example.kinoxpbackend.repository.EmployeeRepository;
+import com.example.kinoxpbackend.repository.ShiftRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 
 @Controller
@@ -33,19 +29,23 @@ public class Setup implements ApplicationRunner {
   ScreeningRepository screeningRepository;
   TheaterRepository theaterRepository;
   SeatRepository seatRepository;
+  EmployeeRepository employeeRepository;
+  ShiftRepository shiftRepository;
 
-  public Setup(MovieRepository movieRepository, ScreeningRepository screeningRepository, TheaterRepository theaterRepository, SeatRepository seatRepository) {
+  public Setup(MovieRepository movieRepository,
+               ScreeningRepository screeningRepository,
+               TheaterRepository theaterRepository,
+               SeatRepository seatRepository,
+               ShiftRepository shiftRepository,
+               EmployeeRepository employeeRepository) {
     this.movieRepository = movieRepository;
     this.screeningRepository = screeningRepository;
     this.theaterRepository = theaterRepository;
     this.seatRepository = seatRepository;
-    EmployeeRepository employeeRepository;
-    ShiftRepository shiftRepository;
+    this.shiftRepository = shiftRepository;
+    this.employeeRepository = employeeRepository;
+  }
 
-  public Setup(EmployeeRepository employeeRepository, ShiftRepository shiftRepository) {
-      this.employeeRepository = employeeRepository;
-      this.shiftRepository = shiftRepository;
-    }
 
     @Override
     public void run (ApplicationArguments args) throws Exception {
@@ -83,19 +83,17 @@ public class Setup implements ApplicationRunner {
         }
       }
 
-    List<Seatings> seatsTheater2 = new ArrayList<>();
-    for (int i = 0; i < 25; i++) {
-      String row = rows[i];
-      for (int j = 1; j <= 16; j++) {
-        Seatings tempSeat = new Seatings(row, j, theater2);
-        seatsTheater1.add(tempSeat);
+      List<Seatings> seatsTheater2 = new ArrayList<Seatings>();
+      for (int i = 0; i < 25; i++) {
+        String row = rows[i];
+        for (int j = 1; j <= 16; j++) {
+          Seatings tempSeat = new Seatings(row, j, theater2);
+          seatsTheater1.add(tempSeat);
+        }
       }
-    }
-    System.out.println(seatsTheater1);
-    System.out.println(seatsTheater2);
-    seatRepository.saveAll(seatsTheater1);
+      seatRepository.saveAll(seatsTheater1);
 
-
+/*
     // add screenings
     Screening screening = new Screening(10, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,10,23,10),movie2, theater);
     Screening screening2 = new Screening(40, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie2, theater2);
@@ -105,11 +103,7 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening);
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
-
-
-    }
-
-
+*/
 
       Employee employee1 = Employee.builder()
           .name("Jens")
@@ -150,7 +144,6 @@ public class Setup implements ApplicationRunner {
       shiftRepository.save(shift1);
       shiftRepository.save(shift2);
 
-
     }
-  }
 
+}
