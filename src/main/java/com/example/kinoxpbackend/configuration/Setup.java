@@ -31,6 +31,12 @@ public class Setup implements ApplicationRunner {
         .password("test123")
         .userName("JensAdmin")
         .build();
+    Employee employee3 = Employee.builder()
+        .name("Simon")
+        .type(4)
+        .password("test123")
+        .userName("SimonOlsen")
+        .build();
 
     Employee employee2 = Employee.builder()
         .name("Mo")
@@ -53,6 +59,7 @@ public class Setup implements ApplicationRunner {
 
     employeeRepository.save(employee1);
     employeeRepository.save(employee2);
+    employeeRepository.save(employee3);
 
     shiftRepository.save(shift1);
     shiftRepository.save(shift2);
