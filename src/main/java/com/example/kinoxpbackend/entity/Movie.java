@@ -31,8 +31,7 @@ public class Movie {
     private double duration;
     @Column(nullable = false,length = 450)
     private int ageLimit;
-    @Column(nullable = false,length = 450)
-    private String image;
+
     @Column(nullable = false,length = 450)
     private LocalDate showStartDate;
     @Column(nullable = false,length = 450)
@@ -44,6 +43,16 @@ public class Movie {
     public Movie() {
     }
 
+    public Movie(int id, String title, String description, double rating, String genre, double duration, int ageLimit, LocalDate showStartDate, LocalDate showEndDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
 
-
+    }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Theater {
@@ -24,6 +25,10 @@ public class Theater {
 
 
     public Theater() {
+    }
+
+    public Theater(int size) {
+        this.size = size;
     }
 
 }
