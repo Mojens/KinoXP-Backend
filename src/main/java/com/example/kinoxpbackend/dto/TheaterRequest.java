@@ -14,14 +14,14 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TheaterRequest {
 
-    private int size;
+    private int id;
 
     public static Theater getTheaterEntity(TheaterRequest t){
-        return new Theater(t.size);
+        return new Theater(t.id);
     }
 
     public TheaterRequest(Theater size) {
-        this.size = size.getSize();
+        this.id = size.getId();
     }
 
 }
