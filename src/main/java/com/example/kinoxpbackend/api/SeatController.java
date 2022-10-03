@@ -1,9 +1,14 @@
 package com.example.kinoxpbackend.api;
 
 
+import com.example.kinoxpbackend.dto.SeatResponse;
 import com.example.kinoxpbackend.dto.TheaterResponse;
+import com.example.kinoxpbackend.entity.Seatings;
+import com.example.kinoxpbackend.repository.SeatRepository;
 import com.example.kinoxpbackend.service.SeatService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -17,12 +22,13 @@ public class SeatController {
     }
 
     @GetMapping
-    public void getTheaters() {
-        seatService.getAllSeats();
+    public List<SeatResponse> getTheaters() {
+       return seatService.getAllSeats();
     }
 
     @GetMapping(path = "/{id}")
-    public SeatService getSeatByIdById(@PathVariable int id) throws Exception {
+    public SeatResponse getSeatByIdById(@PathVariable int id) throws Exception {
+
         return seatService.getSeatById(id);
     }
 

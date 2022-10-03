@@ -61,7 +61,7 @@ public class Setup implements ApplicationRunner {
 
     theaterRepository.save(theater);
     theaterRepository.save(theater2);
-*/
+
     // Seats
 
 
@@ -97,7 +97,7 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening);
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
-*/
+
 
   }
 
