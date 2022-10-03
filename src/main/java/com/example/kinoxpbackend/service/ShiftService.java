@@ -1,16 +1,13 @@
 package com.example.kinoxpbackend.service;
 
-import com.example.kinoxpbackend.dto.EmployeeRequest;
-import com.example.kinoxpbackend.dto.EmployeeResponse;
+
 import com.example.kinoxpbackend.dto.ShiftRequest;
 import com.example.kinoxpbackend.dto.ShiftResponse;
 import com.example.kinoxpbackend.entity.Employee;
 import com.example.kinoxpbackend.entity.Shift;
 import com.example.kinoxpbackend.repository.EmployeeRepository;
 import com.example.kinoxpbackend.repository.ShiftRepository;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,7 +31,7 @@ public class ShiftService {
         return shifts.stream().map(shift -> new ShiftResponse(shift, false)).toList();
     }
 
-    public ShiftResponse findById(@PathVariable int id) throws Exception{
+    public ShiftResponse findShiftById(@PathVariable int id) throws Exception{
         Shift foundShift = shiftRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Shift with ID: "+id+", cannot be found"));
         return new ShiftResponse(foundShift, true);
     }
@@ -52,20 +49,26 @@ public class ShiftService {
         shiftRepository.save(createdShift);
     }
 
-    public void editEmployee(EmployeeRequest employeeRequest, int id){
-        Employee foundEmployee = employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with ID: "+id+", cannot be found"));
-        if (employeeRequest.getId() != id){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot find an Employee with given ID");
+    public void editShift(ShiftRequest shiftRequest, int shiftId){
+        Shift foundShift = shiftRepository.findById(shiftRequest.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shift with ID: " + shiftId + ", cannot be found"));
+        if (shiftRequest.getId() != shiftId){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot find an Shift with given ID");
         }
-        foundEmployee.setName(employeeRequest.getName());
-        foundEmployee.setUserName(BCrypt.hashpw(employeeRequest.getUserName(),BCrypt.gensalt()));
-        foundEmployee.setPassword(employeeRequest.getPassword());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime startTimeDate = LocalDateTime.parse(shiftRequest.getStartTime(),formatter);
+        LocalDateTime endTimeDate = LocalDateTime.parse(shiftRequest.getEndTime(),formatter);
+        Employee foundEmployee = employeeRepository.findById(shiftRequest.getEmployeeId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with ID: " + shiftRequest.getEmployeeId() + ", cannot be found"));
 
-        employeeRepository.save(foundEmployee);
+        foundShift.setStartTime(startTimeDate);
+        foundShift.setEndTime(endTimeDate);
+        foundShift.setEmployee(foundEmployee);
+
+
+        shiftRepository.save(foundShift);
     }
 
-    public void deleteEmployeeById(@PathVariable int id){
-        employeeRepository.deleteById(id);
+    public void deleteShiftById(@PathVariable int id){
+        shiftRepository.deleteById(id);
     }
 
 

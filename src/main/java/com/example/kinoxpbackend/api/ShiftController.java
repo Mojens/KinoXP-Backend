@@ -1,10 +1,8 @@
 package com.example.kinoxpbackend.api;
 
 import com.example.kinoxpbackend.dto.EmployeeRequest;
-import com.example.kinoxpbackend.dto.EmployeeResponse;
 import com.example.kinoxpbackend.dto.ShiftRequest;
 import com.example.kinoxpbackend.dto.ShiftResponse;
-import com.example.kinoxpbackend.service.EmployeeService;
 import com.example.kinoxpbackend.service.ShiftService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,7 +31,7 @@ public class ShiftController {
 
     @GetMapping("/{id}")
     ShiftResponse getShiftById(@PathVariable int id) throws Exception{
-        return shiftService.findById(id);
+        return shiftService.findShiftById(id);
     }
 
 
@@ -45,17 +43,17 @@ public class ShiftController {
         shiftService.addShift(e.getEmployeeId(),startTimeDate,endTimeDate);
     }
 
-    /*
-    @PutMapping("/{id}")
-    ResponseEntity<Boolean> editEmployee(@RequestBody EmployeeRequest e, @PathVariable int id){
-        shiftService.editShift(e, id);
+
+    @PutMapping("/{shiftId}")
+    ResponseEntity<Boolean> editShift(@RequestBody ShiftRequest e, @PathVariable int shiftId){
+        shiftService.editShift(e,shiftId);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    void deleteEmployeeByID(@PathVariable int id){
+    void deleteShiftById(@PathVariable int id){
         shiftService.deleteShiftById(id);
     }
 
-     */
+
 }

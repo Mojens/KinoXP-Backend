@@ -20,7 +20,6 @@ public class ShiftRequest {
 
   private int id;
 
-
   private String startTime;
 
   private String endTime;
