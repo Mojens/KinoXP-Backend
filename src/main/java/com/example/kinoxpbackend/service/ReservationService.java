@@ -14,12 +14,7 @@ public class ReservationService {
 
     ReservationRepository reservationRepository;
 
-    public ReservationResponse addReservation(ReservationRequest body) {
-        return null;
-    }
 
-    public void editReservation(ReservationRequest body, int id) {
-    }
 
     public List<ReservationResponse> findReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
@@ -32,5 +27,12 @@ public class ReservationService {
     }
 
     public void deleteReservation(int id) {
+    }
+
+    public ReservationResponse addReservation(ReservationRequest body) {
+        return null;
+    }
+
+    public void editReservation(ReservationRequest body, int id) {
     }
 }

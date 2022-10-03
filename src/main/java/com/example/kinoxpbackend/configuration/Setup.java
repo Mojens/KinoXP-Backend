@@ -5,6 +5,8 @@ import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Seatings;
 import com.example.kinoxpbackend.entity.Theater;
+import com.example.kinoxpbackend.entity.Seatings;
+import com.example.kinoxpbackend.entity.Theater;
 import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
@@ -17,6 +19,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 @Controller
 public class Setup implements ApplicationRunner {
@@ -55,7 +61,7 @@ public class Setup implements ApplicationRunner {
 
     theaterRepository.save(theater);
     theaterRepository.save(theater2);
-
+*/
     // Seats
 
 
@@ -91,7 +97,7 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening);
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
-
+*/
 
   }
 
@@ -102,18 +108,6 @@ public class Setup implements ApplicationRunner {
 
   }
 
-  /*
-    @Override
-    public void run(ApplicationArguments args){
-        ArrayList<Reservation> reservations = new ArrayList<Reservation>(
-                Arrays.asList(
-                        new Reservation("nfnfjd@lddjk.dk","30208430", 1, "123456789"),
-                        new Reservation("nfcdefjd@lddjk.dk","30205430", 5, "12345dew6789"),
-                        new Reservation("frefwe@lddjk.dk","30328430", 4, "dfwedwed")
-                )
-        );
-        reservationRepository.saveAll(reservations);
-    }
-    */
+
 
 }
