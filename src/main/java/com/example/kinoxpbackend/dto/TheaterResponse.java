@@ -14,10 +14,10 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TheaterResponse {
 
-    private int size;
+    private int id;
 
     public TheaterResponse(Theater size) {
-        this.size = size.getSize();
+        this.id = size.getId();
     }
 
 

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Theater {
     @Id
-    private int size;
+    private int id;
 
     @OneToMany(mappedBy = "theater")
     private List<Screening> screenings = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Theater {
     }
 
     public Theater(int size) {
-        this.size = size;
+        this.id = size;
     }
 
 }
