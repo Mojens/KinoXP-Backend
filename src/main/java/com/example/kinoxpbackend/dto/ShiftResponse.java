@@ -1,4 +1,4 @@
 package com.example.kinoxpbackend.dto;
 
-public class ReservationRequest {
+public class ShiftResponse {
 }
