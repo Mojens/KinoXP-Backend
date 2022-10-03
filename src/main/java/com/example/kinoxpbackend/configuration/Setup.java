@@ -1,9 +1,14 @@
 package com.example.kinoxpbackend.configuration;
 
 
+import com.example.kinoxpbackend.entity.Movie;
+import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Seat;
 import com.example.kinoxpbackend.entity.Theater;
+import com.example.kinoxpbackend.repository.MovieRepository;
+import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
+import com.example.kinoxpbackend.repository.TheaterRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -27,10 +32,6 @@ public class Setup implements ApplicationRunner {
     this.theaterRepository = theaterRepository;
     this.seatRepository = seatRepository;
   }
-
-
-
-
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -64,7 +65,7 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
 
-    seatConfig();
+
   }
 
   public static void seatConfig(){
