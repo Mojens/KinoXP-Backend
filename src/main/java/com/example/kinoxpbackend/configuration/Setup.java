@@ -20,8 +20,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 
 @Controller
@@ -31,19 +29,23 @@ public class Setup implements ApplicationRunner {
   ScreeningRepository screeningRepository;
   TheaterRepository theaterRepository;
   SeatRepository seatRepository;
+  EmployeeRepository employeeRepository;
+  ShiftRepository shiftRepository;
 
-  public Setup(MovieRepository movieRepository, ScreeningRepository screeningRepository, TheaterRepository theaterRepository, SeatRepository seatRepository) {
+  public Setup(MovieRepository movieRepository,
+               ScreeningRepository screeningRepository,
+               TheaterRepository theaterRepository,
+               SeatRepository seatRepository,
+               ShiftRepository shiftRepository,
+               EmployeeRepository employeeRepository) {
     this.movieRepository = movieRepository;
     this.screeningRepository = screeningRepository;
     this.theaterRepository = theaterRepository;
     this.seatRepository = seatRepository;
-    EmployeeRepository employeeRepository;
-    ShiftRepository shiftRepository;
+    this.shiftRepository = shiftRepository;
+    this.employeeRepository = employeeRepository;
+  }
 
-  public Setup(EmployeeRepository employeeRepository, ShiftRepository shiftRepository) {
-      this.employeeRepository = employeeRepository;
-      this.shiftRepository = shiftRepository;
-    }
 
     @Override
     public void run (ApplicationArguments args) throws Exception {
@@ -103,10 +105,6 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening3);
 */
 
-    }
-
-    public static void seatConfig () {
-
       Employee employee1 = Employee.builder()
           .name("Jens")
           .type(4)
@@ -146,7 +144,6 @@ public class Setup implements ApplicationRunner {
       shiftRepository.save(shift1);
       shiftRepository.save(shift2);
 
-
     }
-  }
+
 }
