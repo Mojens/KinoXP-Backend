@@ -6,11 +6,10 @@ import com.example.kinoxpbackend.repository.EmployeeRepository;
 import com.example.kinoxpbackend.repository.ShiftRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
+
 
 @Controller
 public class Setup implements ApplicationRunner {
