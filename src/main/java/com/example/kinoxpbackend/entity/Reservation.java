@@ -30,12 +30,16 @@ public class Reservation {
     @Column ( length = 16, nullable = false, unique = true)
     String safetyId;
 
+    @ManyToOne
+    Screening screening;
 
-    public Reservation(String email, String phoneNumber, int employeeId, String safetyId) {
+
+    public Reservation(String email, String phoneNumber, int employeeId, String safetyId, Screening screening) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.employeeId = employeeId;
         this.safetyId = safetyId;
+        this.screening = screening;
     }
 
 }

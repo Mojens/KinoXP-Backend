@@ -22,11 +22,12 @@ public class MovieRequest {
     private String genre;
     private double duration;
     private int ageLimit;
+    private double price;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
     public static Movie getMovieEntity(MovieRequest m){
-        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.showStartDate,m.showEndDate);
+        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.showStartDate,m.showEndDate);
     }
 
     // Movie to MovieRequest conversion
@@ -38,6 +39,7 @@ public class MovieRequest {
         this.genre = m.getGenre();
         this.duration = m.getDuration();
         this.ageLimit = m.getAgeLimit();
+        this.price = m.getPrice();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
     }

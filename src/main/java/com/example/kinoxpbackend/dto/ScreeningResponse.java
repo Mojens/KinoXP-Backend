@@ -2,6 +2,7 @@ package com.example.kinoxpbackend.dto;
 
 import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Reservation;
+import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Theater;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScreeningResponse {
 
@@ -27,13 +29,13 @@ public class ScreeningResponse {
     private Theater theater;
     private List<Reservation> reservation;
 
-    public ScreeningResponse(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater, List<Reservation> reservation) {
-        this.id = id;
-        this.performance = performance;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.movie = movie;
-        this.theater = theater;
-        this.reservation = reservation;
+    public ScreeningResponse(Screening screening) {
+        this.id = screening.getId();
+        this.performance = screening.getPerformance();
+        this.startTime = screening.getStartTime();
+        this.endTime = screening.getEndTime();
+        this.movie = screening.getMovie();
+        this.theater = screening.getTheater();
+        this.reservation = screening.getReservations();
     }
 }
