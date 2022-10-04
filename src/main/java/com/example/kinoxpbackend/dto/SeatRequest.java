@@ -18,18 +18,5 @@ public class SeatRequest {
     int seatNumber;
     private Theater theater;
 
-    public static Seatings getSeatingEntity(SeatRequest s){
-        return new Seatings(s.id, s.rowNum, s.seatNumber, s.theater);
-
-    }
-
-    public SeatRequest(Seatings seatings){
-        this.id = seatings.getId();
-        this.rowNum = seatings.getRowNum();
-        this.seatNumber = seatings.getSeatNumber();
-        this.theater = seatings.getTheater();
-
-    }
-
 
 }
