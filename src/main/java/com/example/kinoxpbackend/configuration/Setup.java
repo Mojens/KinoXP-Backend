@@ -1,15 +1,11 @@
 package com.example.kinoxpbackend.configuration;
 
 
-import com.example.kinoxpbackend.entity.Movie;
-import com.example.kinoxpbackend.entity.Seatings;
-import com.example.kinoxpbackend.entity.Theater;
+import com.example.kinoxpbackend.entity.*;
 import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.SeatRepository;
 import com.example.kinoxpbackend.repository.TheaterRepository;
-import com.example.kinoxpbackend.entity.Employee;
-import com.example.kinoxpbackend.entity.Shift;
 import com.example.kinoxpbackend.repository.EmployeeRepository;
 import com.example.kinoxpbackend.repository.ShiftRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -83,7 +79,7 @@ public class Setup implements ApplicationRunner {
         }
       }
 
-      List<Seatings> seatsTheater2 = new ArrayList<Seatings>();
+
       for (int i = 0; i < 25; i++) {
         String row = rows[i];
         for (int j = 1; j <= 16; j++) {
@@ -93,7 +89,7 @@ public class Setup implements ApplicationRunner {
       }
       seatRepository.saveAll(seatsTheater1);
 
-/*
+
     // add screenings
     Screening screening = new Screening(10, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,10,23,10),movie2, theater);
     Screening screening2 = new Screening(40, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie2, theater2);
@@ -103,7 +99,7 @@ public class Setup implements ApplicationRunner {
     screeningRepository.save(screening);
     screeningRepository.save(screening2);
     screeningRepository.save(screening3);
-*/
+
 
       Employee employee1 = Employee.builder()
           .name("Jens")
