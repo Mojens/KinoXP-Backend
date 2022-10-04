@@ -22,21 +22,7 @@ public class ReservationRequest {
     String phoneNumber;
     int employeeId;
     String safetyId;
-    Screening screening;
-
-    public static Reservation getReservationEntity(ReservationRequest r){
-        return new Reservation(r.email, r.phoneNumber, r.employeeId, r.safetyId, r.screening);
-
-    }
-
-    public ReservationRequest(Reservation r){
-        this.id = r.getId();
-        this.email = r.getEmail();
-        this.phoneNumber = r.getPhoneNumber();
-        this.employeeId = r.getEmployeeId();
-        this.safetyId = r.getSafetyId();
-        this.screening = r.getScreening();
-    }
+    int screeningId;
 
 
 }

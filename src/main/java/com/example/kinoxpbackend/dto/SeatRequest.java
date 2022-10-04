@@ -16,7 +16,7 @@ public class SeatRequest {
     int id;
     String rowNum;
     int seatNumber;
-    private Theater theater;
+    int theaterId;
 
 
 }

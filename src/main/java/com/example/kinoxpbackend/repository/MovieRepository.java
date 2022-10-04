@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     boolean existsMovieById(int id);
+    Movie findMovieById(int id);
 
 }
 

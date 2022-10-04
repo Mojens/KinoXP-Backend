@@ -5,6 +5,7 @@ import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Reservation;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.repository.ReservationRepository;
+import com.example.kinoxpbackend.repository.ScreeningRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -15,6 +16,13 @@ import java.util.stream.Collectors;
 public class ReservationService {
 
     ReservationRepository reservationRepository;
+
+    ScreeningRepository screeningRepository;
+
+    public ReservationService(ReservationRepository reservationRepository, ScreeningRepository screeningRepository){
+        this.reservationRepository = reservationRepository;
+        this.screeningRepository = screeningRepository;
+    }
 
 
 
@@ -43,7 +51,14 @@ public class ReservationService {
         if(reservationRepository.existsById(body.getId())){
             throw new RuntimeException("Reservation with this ID allready exist");
         }
-        Reservation reservation = ReservationRequest.getReservationEntity(body);
+        Screening screening = screeningRepository.findScreeningById(body.getScreeningId());
+
+        Reservation reservation = Reservation.builder()
+                .email(body.getEmail())
+                .phoneNumber(body.getPhoneNumber())
+                .employeeId(body.getEmployeeId())
+                .safetyId(body.getSafetyId())
+                .screening(screening).build();
         reservationRepository.save(reservation);
         return new ReservationResponse(reservation);
     }
