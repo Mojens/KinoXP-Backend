@@ -148,10 +148,26 @@ public class Setup implements ApplicationRunner {
       reservationRepository.save(reservation2);
       reservationRepository.save(reservation3);
 
-      SeatChoice seatChoice1 = new SeatChoice(seatRepository.getSeatingsById(8), reservationRepository.getReservationById(1));
-      SeatChoice seatChoice2 = new SeatChoice(seatRepository.getSeatingsById(10), reservationRepository.getReservationById(2));
-      SeatChoice seatChoice3 = new SeatChoice(seatRepository.getSeatingsById(1), reservationRepository.getReservationById(3));
-      SeatChoice seatChoice4 = new SeatChoice(seatRepository.getSeatingsById(2), reservationRepository.getReservationById(3));
+      SeatChoice seatChoice1 = SeatChoice.builder()
+              .seatings(seatRepository.getSeatingsById(8))
+              .reservation(reservationRepository.getReservationById(1))
+              .build();
+
+      SeatChoice seatChoice2 = SeatChoice.builder()
+              .seatings(seatRepository.getSeatingsById(10))
+              .reservation(reservationRepository.getReservationById(2))
+              .build();
+
+      SeatChoice seatChoice3 = SeatChoice.builder()
+              .seatings(seatRepository.getSeatingsById(1))
+              .reservation(reservationRepository.getReservationById(3))
+              .build();
+
+      SeatChoice seatChoice4 = SeatChoice.builder()
+              .seatings(seatRepository.getSeatingsById(2))
+              .reservation(reservationRepository.getReservationById(3))
+              .build();
+
       seatChoiceRepository.save(seatChoice1);
       seatChoiceRepository.save(seatChoice2);
       seatChoiceRepository.save(seatChoice3);

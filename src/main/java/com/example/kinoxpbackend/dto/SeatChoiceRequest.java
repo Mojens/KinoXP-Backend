@@ -1,9 +1,6 @@
 package com.example.kinoxpbackend.dto;
 
-import com.example.kinoxpbackend.entity.Reservation;
-import com.example.kinoxpbackend.entity.Screening;
-import com.example.kinoxpbackend.entity.SeatChoice;
-import com.example.kinoxpbackend.entity.Seatings;
+import com.example.kinoxpbackend.entity.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,13 +15,9 @@ import lombok.Setter;
 public class SeatChoiceRequest {
     private int id;
 
-    private Seatings seatings;
+    private int seatingsId;
 
-    private Reservation reservation;
+    private int reservationId;
 
-    public static SeatChoice getSeatChoice (SeatChoiceRequest s) {
-        return new SeatChoice(s.id, s.seatings, s.reservation);
-    }
-
-
+   
 }
