@@ -49,5 +49,15 @@ public class ReservationService {
     }
 
     public void editReservation(ReservationRequest body, int id) {
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
+        if (body.getId() != id){
+            throw new RuntimeException("ID does not match");
+        }
+        reservation.setEmail(body.getEmail());
+        reservation.setPhoneNumber(body.getPhoneNumber());
+        reservation.setEmployeeId(body.getEmployeeId());
+
     }
+
+
 }
