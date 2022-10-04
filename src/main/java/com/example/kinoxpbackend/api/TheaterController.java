@@ -4,6 +4,8 @@ import com.example.kinoxpbackend.dto.TheaterResponse;
 import com.example.kinoxpbackend.service.TheaterService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/theaters")
@@ -15,8 +17,8 @@ public class TheaterController {
     }
 
     @GetMapping
-    public void getTheaters() {
-        theaterService.getAllTheaters();
+    List<TheaterResponse> getTheaters() {
+        return theaterService.getAllTheaters();
     }
 
     @GetMapping(path = "/{id}")
