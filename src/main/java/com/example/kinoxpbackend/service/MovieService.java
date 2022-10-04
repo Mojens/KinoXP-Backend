@@ -50,13 +50,15 @@ public class MovieService {
             throw new RuntimeException("Cannot change ID");
         }
         movie.setTitle(movieRequest.getTitle());
+        movie.setDescription(movieRequest.getDescription());
+        movie.setRating(movieRequest.getRating());
         movie.setGenre(movieRequest.getGenre());
         movie.setDuration(movieRequest.getDuration());
-        movie.setRating(movieRequest.getRating());
         movie.setAgeLimit(movieRequest.getAgeLimit());
+        movie.setPrice(movieRequest.getPrice());
         movie.setShowStartDate(movieRequest.getShowStartDate());
         movie.setShowEndDate(movieRequest.getShowEndDate());
-        movie.setPrice(movieRequest.getPrice());
+
 
         movieRepository.save(movie);
     }
