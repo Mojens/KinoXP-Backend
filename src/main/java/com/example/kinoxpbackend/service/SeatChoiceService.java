@@ -44,7 +44,7 @@ public class SeatChoiceService {
         }
         SeatChoice createdSeatChoice = SeatChoice.builder()
                 .seatings(seatingRepository.getSeatingsById(seatChoiceRequest.getSeatingsId()))
-                .reservation(reservationRepository.getReservationById(seatChoiceRequest.getSeatingsId()))
+                .reservation(reservationRepository.getReservationById(seatChoiceRequest.getReservationId()))
                 .build();
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
