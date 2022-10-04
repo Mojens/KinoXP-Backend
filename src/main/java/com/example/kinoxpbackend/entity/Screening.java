@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
+@Builder
 
 public class Screening {
 

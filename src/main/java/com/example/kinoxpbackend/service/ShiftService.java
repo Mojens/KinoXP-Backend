@@ -51,9 +51,7 @@ public class ShiftService {
 
     public void editShift(ShiftRequest shiftRequest, int shiftId){
         Shift foundShift = shiftRepository.findById(shiftRequest.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shift with ID: " + shiftId + ", cannot be found"));
-        if (shiftRequest.getId() != shiftId){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot find an Shift with given ID");
-        }
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime startTimeDate = LocalDateTime.parse(shiftRequest.getStartTime(),formatter);
         LocalDateTime endTimeDate = LocalDateTime.parse(shiftRequest.getEndTime(),formatter);

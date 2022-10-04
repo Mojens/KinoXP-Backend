@@ -20,7 +20,8 @@ public class TheaterService {
 
     // GetAll theaters
     public List<TheaterResponse> getAllTheaters() {
-        return theaterRepository.findAll().stream().map(TheaterResponse::new).collect(Collectors.toList());
+        List<Theater> theaters = theaterRepository.findAll();
+        return theaters.stream().map(theater -> new TheaterResponse(theater)).toList();
     }
 
     // Get theater by id

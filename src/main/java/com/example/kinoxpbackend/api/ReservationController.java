@@ -13,10 +13,14 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping ("api/reservation")
+@RequestMapping ("api/reservations")
 public class ReservationController {
 
     ReservationService reservationService;
+
+    public ReservationController(ReservationService reservationService){
+        this.reservationService = reservationService;
+    }
 
     @GetMapping
     List<ReservationResponse> getReservations(){

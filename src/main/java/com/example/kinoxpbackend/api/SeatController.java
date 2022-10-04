@@ -2,9 +2,6 @@ package com.example.kinoxpbackend.api;
 
 
 import com.example.kinoxpbackend.dto.SeatResponse;
-import com.example.kinoxpbackend.dto.TheaterResponse;
-import com.example.kinoxpbackend.entity.Seatings;
-import com.example.kinoxpbackend.repository.SeatRepository;
 import com.example.kinoxpbackend.service.SeatService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +24,7 @@ public class SeatController {
     }
 
     @GetMapping(path = "/{id}")
-    public SeatResponse getSeatByIdById(@PathVariable int id) throws Exception {
+    public SeatResponse getSeatById(@PathVariable int id) throws Exception {
 
         return seatService.getSeatById(id);
     }

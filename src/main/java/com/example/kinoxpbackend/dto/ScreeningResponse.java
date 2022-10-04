@@ -5,10 +5,7 @@ import com.example.kinoxpbackend.entity.Reservation;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Theater;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,17 +22,15 @@ public class ScreeningResponse {
     private double performance;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Movie movie;
-    private Theater theater;
-    private List<Reservation> reservation;
+    private int movieId;
+    private int theaterId;
 
     public ScreeningResponse(Screening screening) {
         this.id = screening.getId();
         this.performance = screening.getPerformance();
         this.startTime = screening.getStartTime();
         this.endTime = screening.getEndTime();
-        this.movie = screening.getMovie();
-        this.theater = screening.getTheater();
-        this.reservation = screening.getReservations();
+        this.movieId = screening.getMovie().getId();
+        this.theaterId = screening.getTheater().getId();
     }
 }

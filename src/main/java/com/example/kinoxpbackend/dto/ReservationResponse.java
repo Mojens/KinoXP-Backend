@@ -22,12 +22,15 @@ public class ReservationResponse {
     int employeeId;
     String safetyId;
 
+    int screeningId;
+
     public ReservationResponse (Reservation r){
         this.id = r.getId();
         this.email = r.getEmail();
         this.phoneNumber = r.getPhoneNumber();
         this.employeeId = r.getEmployeeId();
         this.safetyId = r.getSafetyId();
+        this.screeningId = r.getScreening().getId();
     }
 
 }

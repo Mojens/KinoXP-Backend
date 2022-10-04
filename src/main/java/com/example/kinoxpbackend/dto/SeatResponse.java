@@ -18,13 +18,13 @@ public class SeatResponse {
     int id;
     String rowNum;
     int seatNumber;
-    private Theater theater;
+    int theaterId;
 
     public SeatResponse(Seatings seatings){
         this.id = seatings.getId();
         this.rowNum = seatings.getRowNum();
         this.seatNumber = seatings.getSeatNumber();
-        this.theater = seatings.getTheater();
+        this.theaterId = seatings.getTheater().getId();
 
     }
 }

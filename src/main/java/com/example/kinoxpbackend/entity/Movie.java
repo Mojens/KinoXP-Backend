@@ -21,7 +21,7 @@ public class Movie {
     private int id;
     @Column(nullable = false,length = 450)
     private String title;
-    @Column(nullable = false,length = 450)
+    @Column(nullable = false,length = 4250)
     private String description;
     @Column(nullable = false,length = 450)
     private double rating;
