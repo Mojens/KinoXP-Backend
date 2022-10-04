@@ -21,15 +21,15 @@ public class SeatChoiceController {
     public SeatChoiceController(SeatChoiceService seatChoiceService) {this.seatChoiceService = seatChoiceService;}
 
     @GetMapping
-    public List<SeatChoiceResponse> getSeatChoiceResponses() {return seatChoiceService.getAllSeatChoices();}
+    List<SeatChoiceResponse> getSeatChoiceResponses() {return seatChoiceService.getAllSeatChoices();}
 
     @GetMapping(path = "/{id}")
-    public SeatChoiceResponse getSeatChoiceById(@PathVariable int id) throws Exception {
+    SeatChoiceResponse getSeatChoiceById(@PathVariable int id) throws Exception {
         return seatChoiceService.getSeatChoiceById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public SeatChoiceResponse addSeatChoice(@RequestBody SeatChoiceRequest seatChoiceRequest) {
+    SeatChoiceResponse addSeatChoice(@RequestBody SeatChoiceRequest seatChoiceRequest) {
         return seatChoiceService.addSeatChoice(seatChoiceRequest);
     }
 
