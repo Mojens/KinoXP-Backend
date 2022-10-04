@@ -55,9 +55,6 @@ public class SeatChoiceService {
 
     public void editSeatChoice(SeatChoiceRequest seatChoiceRequest, int id) {
         SeatChoice seatChoice = seatChoiceRepository.findById(id).orElseThrow(() -> new RuntimeException("SeatChoice with this ID does not exist"));
-        if (seatChoiceRequest.getId() != id) {
-            throw new RuntimeException("Cannot change ID");
-        }
 
         seatChoice.setSeatings(seatingRepository.getSeatingsById(seatChoiceRequest.getSeatingsId()));
         seatChoice.setReservation(reservationRepository.getReservationById(seatChoiceRequest.getReservationId()));
