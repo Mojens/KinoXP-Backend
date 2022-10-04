@@ -26,6 +26,22 @@ public class ScreeningRequest {
     private int movieId;
     private int theaterId;
 
+    public ScreeningRequest(Screening screening) {
+        this.id = screening.getId();
+        this.performance = screening.getPerformance();
+        this.startTime = screening.getStartTime();
+        this.endTime = screening.getEndTime();
+        this.movieId = screening.getMovie().getId();
+        this.theaterId = screening.getTheater().getId();
+    }
+
+    public ScreeningRequest(double performance, LocalDateTime startTime, LocalDateTime endTime, int movieId, int theaterId) {
+        this.performance = performance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movieId = movieId;
+        this.theaterId = theaterId;
+    }
 
 
 }

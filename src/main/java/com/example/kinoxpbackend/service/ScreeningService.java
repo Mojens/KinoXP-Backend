@@ -71,6 +71,8 @@ public class ScreeningService {
         screening.setPerformance(screeningRequest.getPerformance());
         screening.setStartTime(screeningRequest.getStartTime());
         screening.setEndTime(screeningRequest.getEndTime());
+
+        screeningRepository.save(screening);
     }
 
     // delete screening

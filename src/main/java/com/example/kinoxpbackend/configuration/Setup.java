@@ -93,7 +93,7 @@ public class Setup implements ApplicationRunner {
 
     // add screenings
     Screening screening = new Screening(10, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,10,23,10),movie2, theater);
-    Screening screening2 = new Screening(40, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie2, theater2);
+    Screening screening2 = new Screening(40, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie, theater2);
     Screening screening3 = new Screening(30, LocalDateTime.of(2022,10,10,20,10),LocalDateTime.of(2022,10,11,23,10),movie2, theater);
 
 
