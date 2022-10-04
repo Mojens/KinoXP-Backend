@@ -2,12 +2,7 @@ package com.example.kinoxpbackend.configuration;
 
 
 import com.example.kinoxpbackend.entity.*;
-import com.example.kinoxpbackend.repository.MovieRepository;
-import com.example.kinoxpbackend.repository.ScreeningRepository;
-import com.example.kinoxpbackend.repository.SeatRepository;
-import com.example.kinoxpbackend.repository.TheaterRepository;
-import com.example.kinoxpbackend.repository.EmployeeRepository;
-import com.example.kinoxpbackend.repository.ShiftRepository;
+import com.example.kinoxpbackend.repository.*;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -24,22 +19,28 @@ public class Setup implements ApplicationRunner {
   MovieRepository movieRepository;
   ScreeningRepository screeningRepository;
   TheaterRepository theaterRepository;
-  SeatRepository seatRepository;
+  SeatingRepository seatRepository;
   EmployeeRepository employeeRepository;
   ShiftRepository shiftRepository;
+  ReservationRepository reservationRepository;
+  SeatChoiceRepository seatChoiceRepository;
 
   public Setup(MovieRepository movieRepository,
                ScreeningRepository screeningRepository,
                TheaterRepository theaterRepository,
-               SeatRepository seatRepository,
+               SeatingRepository seatRepository,
                ShiftRepository shiftRepository,
-               EmployeeRepository employeeRepository) {
+               EmployeeRepository employeeRepository,
+               ReservationRepository reservationRepository,
+               SeatChoiceRepository seatChoiceRepository) {
     this.movieRepository = movieRepository;
     this.screeningRepository = screeningRepository;
     this.theaterRepository = theaterRepository;
     this.seatRepository = seatRepository;
     this.shiftRepository = shiftRepository;
     this.employeeRepository = employeeRepository;
+    this.reservationRepository = reservationRepository;
+    this.seatChoiceRepository = seatChoiceRepository;
   }
 
 
@@ -139,6 +140,22 @@ public class Setup implements ApplicationRunner {
 
       shiftRepository.save(shift1);
       shiftRepository.save(shift2);
+
+      Reservation reservation1 = new Reservation("Jan", "61426729", 1, "h", screeningRepository.findScreeningById(1));
+      Reservation reservation2 = new Reservation("Bo", "61426786", 2, "ui", screeningRepository.findScreeningById(2));
+      Reservation reservation3 = new Reservation("Lars", "61426700", 3, "a", screeningRepository.findScreeningById(3));
+      reservationRepository.save(reservation1);
+      reservationRepository.save(reservation2);
+      reservationRepository.save(reservation3);
+
+      SeatChoice seatChoice1 = new SeatChoice(seatRepository.getSeatingsById(8), reservationRepository.getReservationById(1));
+      SeatChoice seatChoice2 = new SeatChoice(seatRepository.getSeatingsById(10), reservationRepository.getReservationById(2));
+      SeatChoice seatChoice3 = new SeatChoice(seatRepository.getSeatingsById(1), reservationRepository.getReservationById(3));
+      SeatChoice seatChoice4 = new SeatChoice(seatRepository.getSeatingsById(2), reservationRepository.getReservationById(3));
+      seatChoiceRepository.save(seatChoice1);
+      seatChoiceRepository.save(seatChoice2);
+      seatChoiceRepository.save(seatChoice3);
+      seatChoiceRepository.save(seatChoice4);
 
     }
 

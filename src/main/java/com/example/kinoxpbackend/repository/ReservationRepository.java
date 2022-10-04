@@ -4,4 +4,5 @@ import com.example.kinoxpbackend.entity.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReservationRepository extends JpaRepository <Reservation,Integer> {
+    Reservation getReservationById(int id);
 }
