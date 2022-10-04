@@ -39,18 +39,22 @@ public class ReservationService {
 
 
 
-    public void deleteReservation(@PathVariable int id) {
+    public void deleteReservation(int id) {
         if(!reservationRepository.existsById(id)){
-            throw new RuntimeException("Reservaation not found");
+            throw new RuntimeException("Reservation not found");
         }
+        System.out.println("Before delete");
+        reservationRepository.deleteById(id);
+        System.out.println("After delete");
+
     }
 
 
     public ReservationResponse addReservation(ReservationRequest body) {
 
-        if(reservationRepository.existsById(body.getId())){
-            throw new RuntimeException("Reservation with this ID allready exist");
-        }
+        //if(reservationRepository.existsById(body.getId())){
+        //    throw new RuntimeException("Reservation with this ID allready exist");
+        //}
         Screening screening = screeningRepository.findScreeningById(body.getScreeningId());
 
         Reservation reservation = Reservation.builder()
@@ -65,12 +69,12 @@ public class ReservationService {
 
     public void editReservation(ReservationRequest body, int id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
-        if (body.getId() != id){
-            throw new RuntimeException("ID does not match");
-        }
+
         reservation.setEmail(body.getEmail());
         reservation.setPhoneNumber(body.getPhoneNumber());
         reservation.setEmployeeId(body.getEmployeeId());
+        reservation.setSafetyId(body.getSafetyId());
+        reservationRepository.save(reservation);
 
     }
 
