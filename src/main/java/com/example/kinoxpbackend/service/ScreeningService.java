@@ -67,9 +67,7 @@ public class ScreeningService {
     // edit screening
     public void editScreening(ScreeningRequest screeningRequest, int id) {
         Screening screening = screeningRepository.findById(id).orElseThrow(() -> new RuntimeException("Screening not found"));
-        if (screeningRequest.getId()!=id) {
-            throw new RuntimeException("Screening ID does not match");
-        }
+
         screening.setPerformance(screeningRequest.getPerformance());
         screening.setStartTime(screeningRequest.getStartTime());
         screening.setEndTime(screeningRequest.getEndTime());

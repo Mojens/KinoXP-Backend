@@ -46,9 +46,7 @@ public class MovieService {
     // Edit Movie
     public void editMovie(MovieRequest movieRequest, int id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie with this ID does not exist"));
-        if (movieRequest.getId() != id) {
-            throw new RuntimeException("Cannot change ID");
-        }
+
         movie.setTitle(movieRequest.getTitle());
         movie.setGenre(movieRequest.getGenre());
         movie.setDuration(movieRequest.getDuration());
