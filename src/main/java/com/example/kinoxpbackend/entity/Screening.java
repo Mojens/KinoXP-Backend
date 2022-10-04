@@ -30,7 +30,7 @@ public class Screening {
     @ManyToOne
     private Theater theater;
 
-    @OneToMany(mappedBy = "screening")
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
     public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater, List<Reservation> reservations) {

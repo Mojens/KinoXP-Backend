@@ -3,8 +3,10 @@ package com.example.kinoxpbackend.service;
 import com.example.kinoxpbackend.dto.EmployeeResponse;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
+import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Shift;
+import com.example.kinoxpbackend.entity.Theater;
 import com.example.kinoxpbackend.repository.MovieRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.TheaterRepository;
@@ -50,12 +52,15 @@ public class ScreeningService {
         if (screeningRepository.existsScreeningById(screeningRequest.getId())) {
             throw new RuntimeException("Screening with this ID already exist");
         }
+
+        Movie newMovie = movieRepository.findMovieById(screeningRequest.getMovieId());
+        Theater newTheater = theaterRepository.findTheaterById(screeningRequest.getTheaterId());
         Screening createdScreening = Screening.builder()
             .performance(screeningRequest.getPerformance())
             .startTime(screeningRequest.getStartTime())
             .endTime(screeningRequest.getEndTime())
-            .movie(movieRepository.findMovieById(screeningRequest.getMovieId()))
-            .theater(theaterRepository.findTheaterById(screeningRequest.getTheaterId()))
+            .movie(newMovie)
+            .theater(newTheater)
             .build();
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
