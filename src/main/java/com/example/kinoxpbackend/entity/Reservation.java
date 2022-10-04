@@ -3,6 +3,8 @@ package com.example.kinoxpbackend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +23,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     int id;
-    @Column ( length = 255, nullable = false)
+    @Column ( length = 50, nullable = false)
     String email;
     @Column ( length = 8, nullable = false)
     String phoneNumber;
@@ -32,6 +34,10 @@ public class Reservation {
 
     @ManyToOne
     Screening screening;
+
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+    private List<SeatChoice> seatChoices = new ArrayList<>();
+
 
 
     public Reservation(String email, String phoneNumber, int employeeId, String safetyId, Screening screening) {

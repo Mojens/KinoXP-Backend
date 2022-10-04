@@ -17,7 +17,6 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationRequest {
-    int id;
     String email;
     String phoneNumber;
     int employeeId;

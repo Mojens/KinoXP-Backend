@@ -148,7 +148,7 @@ public class Setup implements ApplicationRunner {
       reservationRepository.save(reservation2);
       reservationRepository.save(reservation3);
 
-      SeatChoice seatChoice1 = new SeatChoice(seatRepository.getSeatingsById(8), reservationRepository.getReservationById(1));
+      SeatChoice seatChoice1 = new SeatChoice(seatRepository.getSeatingsById(8), reservationRepository.getReservationById(2));
       SeatChoice seatChoice2 = new SeatChoice(seatRepository.getSeatingsById(10), reservationRepository.getReservationById(2));
       SeatChoice seatChoice3 = new SeatChoice(seatRepository.getSeatingsById(1), reservationRepository.getReservationById(3));
       SeatChoice seatChoice4 = new SeatChoice(seatRepository.getSeatingsById(2), reservationRepository.getReservationById(3));
