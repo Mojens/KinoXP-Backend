@@ -31,7 +31,7 @@ public class Movie {
     private double duration;
     @Column(nullable = false,length = 450)
 
-    private int ageLimit;
+    private String ageLimit;
     @Column(nullable = false,length = 450)
     private double price;
 
@@ -47,7 +47,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(int id, String title, String description, double rating, String genre, double duration, int ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie(int id, String title, String description, double rating, String genre, double duration, String ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -60,7 +60,7 @@ public class Movie {
         this.showEndDate = showEndDate;
 
     }
-    public Movie( String title, String description, double rating, String genre, double duration, int ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie( String title, String description, double rating, String genre, double duration, String ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
         this.title = title;
         this.description = description;
         this.rating = rating;

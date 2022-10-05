@@ -21,7 +21,7 @@ public class MovieRequest {
     private double rating;
     private String genre;
     private double duration;
-    private int ageLimit;
+    private String ageLimit;
     private double price;
     private LocalDate showStartDate;
     private LocalDate showEndDate;

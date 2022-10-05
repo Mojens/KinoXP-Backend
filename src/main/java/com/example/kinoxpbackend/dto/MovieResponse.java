@@ -22,7 +22,7 @@ public class MovieResponse {
     private double rating;
     private String genre;
     private double duration;
-    private int ageLimit;
+    private String ageLimit;
     private double price;
     private LocalDate showStartDate;
     private LocalDate showEndDate;

@@ -48,10 +48,10 @@ public class Setup implements ApplicationRunner {
     public void run (ApplicationArguments args) throws Exception {
 
       // Add movie
-      Movie movie = new Movie("Batman Begins", "Good movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
-      Movie movie2 = new Movie("Batman Dark knight", "Best movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
-      Movie movie3 = new Movie("Batman Rises", "Decent movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
-      Movie movie4 = new Movie("The Batman", "Weird movie", 5, "Action", 150, 15, 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie = new Movie("Batman Begins", "Good movie", 5, "Action", 150, "PG-15", 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie2 = new Movie("Batman Dark knight", "Best movie", 5, "Action", 150, "PG-13", 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie3 = new Movie("Batman Rises", "Decent movie", 5, "Action", 150, "PG", 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
+      Movie movie4 = new Movie("The Batman", "Weird movie", 5, "Action", 150, "PG-15", 100, LocalDate.of(2022, 10, 10), LocalDate.of(2022, 12, 26));
 
       movieRepository.save(movie);
       movieRepository.save(movie2);
