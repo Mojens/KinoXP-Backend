@@ -20,7 +20,7 @@ public class MovieRequest {
     private String description;
     private double rating;
     private String genre;
-    private double duration;
+    private String duration;
     private String ageLimit;
     private double price;
     private String photo;
