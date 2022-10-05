@@ -17,7 +17,8 @@ public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false, length = 450)
+    @Column(nullable = false, length = 450, columnDefinition = "decimal(10,2) default '0.0'")
+    // default value
     private double performance;
     @Column(nullable = false, length = 450)
     private LocalDateTime startTime;
