@@ -34,6 +34,8 @@ public class Movie {
     private String ageLimit;
     @Column(nullable = false,length = 450)
     private double price;
+    @Column(nullable = true,length = 4500)
+    private String photo;
 
 
     @Column(nullable = false,length = 450)
@@ -68,6 +70,34 @@ public class Movie {
         this.duration = duration;
         this.ageLimit = ageLimit;
         this.price = price;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
+
+    }
+
+    public Movie( String title, String description, double rating, String genre, double duration, String ageLimit,double price, String photo, LocalDate showStartDate, LocalDate showEndDate) {
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.price = price;
+        this.photo = photo;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
+
+    }
+    public Movie(int id, String title, String description, double rating, String genre, double duration, String ageLimit,double price,String photo, LocalDate showStartDate, LocalDate showEndDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.price = price;
+        this.photo = photo;
         this.showStartDate = showStartDate;
         this.showEndDate = showEndDate;
 
