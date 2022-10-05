@@ -36,6 +36,8 @@ public class Movie {
     private double price;
     @Column(nullable = true,length = 4500)
     private String photo;
+    @Column(nullable = true,length = 4500)
+    private String stars;
 
 
     @Column(nullable = false,length = 450)
@@ -75,7 +77,7 @@ public class Movie {
 
     }
 
-    public Movie( String title, String description, double rating, String genre, double duration, String ageLimit,double price, String photo, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie( String title, String description, double rating, String genre, double duration, String ageLimit,double price, String photo,String stars, LocalDate showStartDate, LocalDate showEndDate) {
         this.title = title;
         this.description = description;
         this.rating = rating;
@@ -84,11 +86,12 @@ public class Movie {
         this.ageLimit = ageLimit;
         this.price = price;
         this.photo = photo;
+        this.stars = stars;
         this.showStartDate = showStartDate;
         this.showEndDate = showEndDate;
 
     }
-    public Movie(int id, String title, String description, double rating, String genre, double duration, String ageLimit,double price,String photo, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie(int id, String title, String description, double rating, String genre, double duration, String ageLimit,double price,String photo,String stars, LocalDate showStartDate, LocalDate showEndDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -98,6 +101,7 @@ public class Movie {
         this.ageLimit = ageLimit;
         this.price = price;
         this.photo = photo;
+        this.stars = stars;
         this.showStartDate = showStartDate;
         this.showEndDate = showEndDate;
 

@@ -24,11 +24,12 @@ public class MovieRequest {
     private String ageLimit;
     private double price;
     private String photo;
+    private String stars;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
     public static Movie getMovieEntity(MovieRequest m){
-        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.photo,m.showStartDate,m.showEndDate);
+        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.photo,m.stars,m.showStartDate,m.showEndDate);
     }
 
     // Movie to MovieRequest conversion

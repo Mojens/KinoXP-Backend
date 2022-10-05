@@ -25,6 +25,7 @@ public class MovieResponse {
     private String ageLimit;
     private double price;
     private String photo;
+    private String stars;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
@@ -38,6 +39,7 @@ public class MovieResponse {
         this.ageLimit = m.getAgeLimit();
         this.price = m.getPrice();
         this.photo = m.getPhoto();
+        this.stars = m.getStars();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
     }
