@@ -55,4 +55,13 @@ public class Screening {
     }
 
 
+    public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater) {
+        this.id = id;
+        this.performance = performance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movie = movie;
+        this.theater = theater;
+
+    }
 }

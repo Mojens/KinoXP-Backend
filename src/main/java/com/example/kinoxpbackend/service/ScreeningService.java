@@ -50,18 +50,13 @@ public class ScreeningService {
         if (screeningRepository.existsScreeningById(screeningRequest.getId())) {
             throw new RuntimeException("Screening with this ID already exist");
         }
-        Screening createdScreening = Screening.builder()
-            .performance(screeningRequest.getPerformance())
-            .startTime(screeningRequest.getStartTime())
-            .endTime(screeningRequest.getEndTime())
-            .movie(movieRepository.findMovieById(screeningRequest.getMovieId()))
-            .theater(theaterRepository.findTheaterById(screeningRequest.getTheaterId()))
-            .build();
+        Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        newScreening = screeningRepository.save(newScreening);
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
-        screeningRepository.save(createdScreening);
 
-        return new ScreeningResponse(createdScreening);
+
+        return new ScreeningResponse(newScreening);
     }
 
     // edit screening
