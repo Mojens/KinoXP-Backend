@@ -26,6 +26,7 @@ public class MovieResponse {
     private double price;
     private String photo;
     private String stars;
+    private String trailers;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
@@ -40,6 +41,7 @@ public class MovieResponse {
         this.price = m.getPrice();
         this.photo = m.getPhoto();
         this.stars = m.getStars();
+        this.trailers = m.getTrailers();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
     }

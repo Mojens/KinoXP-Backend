@@ -56,6 +56,7 @@ public class MovieService {
         movie.setPrice(movieRequest.getPrice());
         movie.setPhoto(movieRequest.getPhoto());
         movie.setStars(movieRequest.getStars());
+        movie.setTrailers(movieRequest.getTrailers());
         movie.setShowStartDate(movieRequest.getShowStartDate());
         movie.setShowEndDate(movieRequest.getShowEndDate());
 
