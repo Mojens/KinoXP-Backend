@@ -38,6 +38,7 @@ Denne samarbejdskontrakt gælder for projektet Eksamen projekt, med gruppemedlem
 ---------------------------
 
 § 1 Hvert gruppemedlem har tre advarsler, før gruppen vil skride til handling og kontakte en underviser med en anmodning om, at dette skal have konsekvenser.
+
 §1.1 For hver advarsel der skulle forekomme, skal der foretages en demokratisk beslutning angående udfaldet.
 
 § 2 Medlemmer af gruppen prioriterer projektarbejdet meget højt og går ind i projektet med stort engagement og høje ambitioner. Hvis ikke, kan der gives en advarsel fra det demokratiske flertal i gruppen.
@@ -45,7 +46,9 @@ Denne samarbejdskontrakt gælder for projektet Eksamen projekt, med gruppemedlem
 § 2.1 Hvis man ikke har lavet en aftalt opgave, skal man kunne dokumentere at man har gjort et ihærdigt forsøg eller havde været påvirket af force majeure.
 
 § 2.2 Sjusk, uambitiøst arbejde og dvask indstilling vil ikke blive tolereret, og giver en advarsel samt et krav om at få tingene i orden og oppe sig hurtigst muligt.
-§2.3 Ved skub til Github - vedtages det af gruppemedlemmerne – at vi benytter os af Feature Branching-metoden.
+
+§ 2.3 Ved skub til Github - vedtages det af gruppemedlemmerne – at vi benytter os af Feature Branching-metoden.
+
 § 2.4 Gruppemedlemmerne skal, så vidt som muligt, forsøge at uddelegere arbejde ligeligt. Dvs. forskellige arbejdsområder skal berøres af alle gruppemedlemmer.
 
 § 3 Hvis man ikke overholder gruppens mødepligt, giver det en advarsel. 
