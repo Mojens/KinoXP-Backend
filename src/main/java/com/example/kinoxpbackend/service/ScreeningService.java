@@ -54,6 +54,7 @@ public class ScreeningService {
         newScreening = screeningRepository.save(newScreening);
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        screeningRepository.save(newScreening);
 
 
         return new ScreeningResponse(newScreening);
