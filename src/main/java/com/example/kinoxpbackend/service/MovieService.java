@@ -2,13 +2,17 @@ package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.MovieResponse;
+import com.example.kinoxpbackend.dto.ScreeningResponse;
 import com.example.kinoxpbackend.entity.Movie;
+import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.repository.MovieRepository;
+import com.example.kinoxpbackend.repository.ScreeningRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,9 +20,11 @@ import java.util.stream.Collectors;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private final ScreeningRepository screeningRepository;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, ScreeningRepository screeningRepository) {
         this.movieRepository = movieRepository;
+        this.screeningRepository = screeningRepository;
     }
 
     // GetAll movies
@@ -68,6 +74,15 @@ public class MovieService {
     public void deleteMovie(@PathVariable int id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie with this ID does not exist"));
         movieRepository.delete(movie);
+    }
+
+    // Get movies with all its screenings
+    public List<MovieResponse> getMoviesWithScreenings() {
+        List<Movie> movies = movieRepository.findAll();
+        List<MovieResponse> response = movies.stream().map(MovieResponse::new).collect(Collectors.toList());
+
+        return response;
+
     }
 
 

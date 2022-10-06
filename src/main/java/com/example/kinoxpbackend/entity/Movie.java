@@ -48,6 +48,11 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     List<Screening> screenings = new ArrayList<>();
 
+    public void addScreening(Screening screening){
+        screenings.add(screening);
+        screening.setMovie(this);
+    }
+
     public Movie() {
     }
 

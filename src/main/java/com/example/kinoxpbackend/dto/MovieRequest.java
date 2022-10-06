@@ -32,6 +32,7 @@ public class MovieRequest {
     private LocalDate showEndDate;
 
 
+
     public static Movie getMovieEntity(MovieRequest m){
         return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.photo,m.stars,m.trailers,m.showStartDate,m.showEndDate);
     }
@@ -48,5 +49,6 @@ public class MovieRequest {
         this.price = m.getPrice();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
+
     }
 }

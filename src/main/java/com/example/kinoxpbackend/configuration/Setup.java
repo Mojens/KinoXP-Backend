@@ -3,6 +3,7 @@ package com.example.kinoxpbackend.configuration;
 
 import com.example.kinoxpbackend.entity.*;
 import com.example.kinoxpbackend.repository.*;
+import com.example.kinoxpbackend.service.MovieService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class Setup implements ApplicationRunner {
     ReservationRepository reservationRepository;
     SeatChoiceRepository seatChoiceRepository;
 
+
     public Setup(MovieRepository movieRepository,
                  ScreeningRepository screeningRepository,
                  TheaterRepository theaterRepository,
@@ -41,6 +43,7 @@ public class Setup implements ApplicationRunner {
         this.employeeRepository = employeeRepository;
         this.reservationRepository = reservationRepository;
         this.seatChoiceRepository = seatChoiceRepository;
+
     }
 
 
@@ -60,6 +63,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi362988313/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
         // COpy movie2 as a build
@@ -75,6 +79,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi324468761/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
         // Copy movie3 as a build
@@ -90,6 +95,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi144884505/")
                 .showStartDate(LocalDate.of(2022,10,22))
                 .showEndDate(LocalDate.of(2022,12,22))
+                .screenings(new ArrayList<>())
                 .build();
 
 
@@ -106,6 +112,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi3215114777/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
 
@@ -157,6 +164,8 @@ public class Setup implements ApplicationRunner {
         screeningRepository.save(screening);
         screeningRepository.save(screening2);
         screeningRepository.save(screening3);
+
+
 
 
         Employee employee1 = Employee.builder()
