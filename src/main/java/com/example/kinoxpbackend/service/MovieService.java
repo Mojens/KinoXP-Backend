@@ -46,17 +46,20 @@ public class MovieService {
     // Edit Movie
     public void editMovie(MovieRequest movieRequest, int id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie with this ID does not exist"));
-        if (movieRequest.getId() != id) {
-            throw new RuntimeException("Cannot change ID");
-        }
+
         movie.setTitle(movieRequest.getTitle());
+        movie.setDescription(movieRequest.getDescription());
+        movie.setRating(movieRequest.getRating());
         movie.setGenre(movieRequest.getGenre());
         movie.setDuration(movieRequest.getDuration());
-        movie.setRating(movieRequest.getRating());
         movie.setAgeLimit(movieRequest.getAgeLimit());
+        movie.setPrice(movieRequest.getPrice());
+        movie.setPhoto(movieRequest.getPhoto());
+        movie.setStars(movieRequest.getStars());
+        movie.setTrailers(movieRequest.getTrailers());
         movie.setShowStartDate(movieRequest.getShowStartDate());
         movie.setShowEndDate(movieRequest.getShowEndDate());
-        movie.setPrice(movieRequest.getPrice());
+
 
         movieRepository.save(movie);
     }

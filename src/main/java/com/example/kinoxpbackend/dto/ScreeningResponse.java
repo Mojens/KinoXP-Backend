@@ -4,6 +4,7 @@ import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Reservation;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Theater;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -20,7 +21,10 @@ public class ScreeningResponse {
 
     private int id;
     private double performance;
+    // format json dateTime
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime endTime;
     private int movieId;
     private int theaterId;

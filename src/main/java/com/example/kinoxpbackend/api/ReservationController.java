@@ -13,10 +13,14 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping ("api/reservation")
+@RequestMapping ("api/reservations")
 public class ReservationController {
 
     ReservationService reservationService;
+
+    public ReservationController(ReservationService reservationService){
+        this.reservationService = reservationService;
+    }
 
     @GetMapping
     List<ReservationResponse> getReservations(){
@@ -34,7 +38,7 @@ public class ReservationController {
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<Boolean> editReservation (@RequestBody ReservationRequest body, @PathVariable int id){
+    ResponseEntity<Boolean> editReservation (@RequestBody ReservationRequest body, @PathVariable int id){
         reservationService.editReservation (body, id);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }

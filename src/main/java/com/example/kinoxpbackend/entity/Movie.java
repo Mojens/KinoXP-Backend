@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 
@@ -21,19 +20,24 @@ public class Movie {
     private int id;
     @Column(nullable = false,length = 450)
     private String title;
-    @Column(nullable = false,length = 450)
+    @Column(nullable = false,length = 3250)
     private String description;
     @Column(nullable = false,length = 450)
     private double rating;
     @Column(nullable = false,length = 450)
     private String genre;
     @Column(nullable = false,length = 450)
-    private double duration;
+    private String duration;
     @Column(nullable = false,length = 450)
-
-    private int ageLimit;
+    private String ageLimit;
     @Column(nullable = false,length = 450)
     private double price;
+    @Column(nullable = true,length = 200)
+    private String photo;
+    @Column(nullable = true,length = 200)
+    private String stars;
+    @Column(nullable = true,length = 200)
+    private String trailers;
 
 
     @Column(nullable = false,length = 450)
@@ -41,13 +45,13 @@ public class Movie {
     @Column(nullable = false,length = 450)
     private LocalDate showEndDate;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     List<Screening> screenings = new ArrayList<>();
 
     public Movie() {
     }
 
-    public Movie(int id, String title, String description, double rating, String genre, double duration, int ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie(int id, String title, String description, double rating, String genre, String duration, String ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -60,7 +64,7 @@ public class Movie {
         this.showEndDate = showEndDate;
 
     }
-    public Movie( String title, String description, double rating, String genre, double duration, int ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
+    public Movie( String title, String description, double rating, String genre, String duration, String ageLimit,double price, LocalDate showStartDate, LocalDate showEndDate) {
         this.title = title;
         this.description = description;
         this.rating = rating;
@@ -72,4 +76,38 @@ public class Movie {
         this.showEndDate = showEndDate;
 
     }
+
+    public Movie( String title, String description, double rating, String genre, String duration, String ageLimit,double price, String photo,String stars, String trailer, LocalDate showStartDate, LocalDate showEndDate) {
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.price = price;
+        this.photo = photo;
+        this.stars = stars;
+        this.trailers = trailer;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
+
+    }
+    public Movie(int id, String title, String description, double rating, String genre, String duration, String ageLimit,double price,String photo,String stars, String trailer, LocalDate showStartDate, LocalDate showEndDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.genre = genre;
+        this.duration = duration;
+        this.ageLimit = ageLimit;
+        this.price = price;
+        this.photo = photo;
+        this.stars = stars;
+        this.trailers = trailer;
+        this.showStartDate = showStartDate;
+        this.showEndDate = showEndDate;
+
+
+    }
+
 }

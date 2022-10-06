@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,25 +40,27 @@ public class ReservationService {
 
 
 
-    public void deleteReservation(@PathVariable int id) {
+    public void deleteReservation(int id) {
         if(!reservationRepository.existsById(id)){
-            throw new RuntimeException("Reservaation not found");
+            throw new RuntimeException("Reservation not found");
         }
+        System.out.println("Before delete");
+        reservationRepository.deleteById(id);
+        System.out.println("After delete");
+
     }
 
 
     public ReservationResponse addReservation(ReservationRequest body) {
+        String safetyId = getSafetyId(16);
 
-        if(reservationRepository.existsById(body.getId())){
-            throw new RuntimeException("Reservation with this ID allready exist");
-        }
         Screening screening = screeningRepository.findScreeningById(body.getScreeningId());
 
         Reservation reservation = Reservation.builder()
                 .email(body.getEmail())
                 .phoneNumber(body.getPhoneNumber())
                 .employeeId(body.getEmployeeId())
-                .safetyId(body.getSafetyId())
+                .safetyId(safetyId)
                 .screening(screening).build();
         reservationRepository.save(reservation);
         return new ReservationResponse(reservation);
@@ -65,13 +68,26 @@ public class ReservationService {
 
     public void editReservation(ReservationRequest body, int id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
-        if (body.getId() != id){
-            throw new RuntimeException("ID does not match");
-        }
+
         reservation.setEmail(body.getEmail());
         reservation.setPhoneNumber(body.getPhoneNumber());
         reservation.setEmployeeId(body.getEmployeeId());
+        reservationRepository.save(reservation);
 
+    }
+
+
+    private String getSafetyId(int lenght){
+        Random random = new Random();
+        String chars = "0123456789";
+        String safetyId;
+        do {
+            safetyId = "";
+            for (int i = 0; i < lenght; i++) {
+                safetyId += chars.charAt(random.nextInt(chars.length() - 1));
+            }
+        }while(reservationRepository.existsBySafetyId(safetyId));
+        return safetyId;
     }
 
 

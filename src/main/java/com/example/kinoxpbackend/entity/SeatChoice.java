@@ -1,17 +1,17 @@
 package com.example.kinoxpbackend.entity;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class SeatChoice {
 
@@ -25,19 +25,4 @@ public class SeatChoice {
     @ManyToOne
     private Reservation reservation;
 
-
-    public SeatChoice(int id, Seatings seatings, Reservation reservation) {
-        this.id = id;
-        this.seatings = seatings;
-        this.reservation = reservation;
-    }
-
-    public SeatChoice(Seatings seatings, Reservation reservation) {
-        this.seatings = seatings;
-        this.reservation = reservation;
-    }
-
-    public SeatChoice() {
-
-    }
 }

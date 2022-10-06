@@ -2,8 +2,7 @@ package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.SeatResponse;
 import com.example.kinoxpbackend.entity.Seatings;
-import com.example.kinoxpbackend.repository.SeatRepository;
-import org.springframework.security.core.parameters.P;
+import com.example.kinoxpbackend.repository.SeatingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -12,9 +11,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class SeatService {
-    private final SeatRepository seatRepository;
+    private final SeatingRepository seatRepository;
 
-    public SeatService(SeatRepository seatRepository) {
+    public SeatService(SeatingRepository seatRepository) {
         this.seatRepository = seatRepository;
     }
 

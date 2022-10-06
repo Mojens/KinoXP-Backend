@@ -21,9 +21,12 @@ public class MovieResponse {
     private String description;
     private double rating;
     private String genre;
-    private double duration;
-    private int ageLimit;
+    private String duration;
+    private String ageLimit;
     private double price;
+    private String photo;
+    private String stars;
+    private String trailers;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
@@ -36,6 +39,9 @@ public class MovieResponse {
         this.duration = m.getDuration();
         this.ageLimit = m.getAgeLimit();
         this.price = m.getPrice();
+        this.photo = m.getPhoto();
+        this.stars = m.getStars();
+        this.trailers = m.getTrailers();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
     }

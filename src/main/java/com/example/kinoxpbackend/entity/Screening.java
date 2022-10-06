@@ -1,5 +1,6 @@
 package com.example.kinoxpbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,10 +18,13 @@ public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false, length = 450)
+    @Column(nullable = false, length = 450, columnDefinition = "decimal(10,2) default '0.0'")
+    // default value
     private double performance;
     @Column(nullable = false, length = 450)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(nullable = false, length = 450)
     private LocalDateTime endTime;
 
@@ -30,7 +34,7 @@ public class Screening {
     @ManyToOne
     private Theater theater;
 
-    @OneToMany(mappedBy = "screening")
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
     public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater, List<Reservation> reservations) {
@@ -55,4 +59,13 @@ public class Screening {
     }
 
 
+    public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater) {
+        this.id = id;
+        this.performance = performance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movie = movie;
+        this.theater = theater;
+
+    }
 }
