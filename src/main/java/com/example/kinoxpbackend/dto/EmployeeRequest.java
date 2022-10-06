@@ -5,9 +5,11 @@ import com.example.kinoxpbackend.entity.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class EmployeeRequest {
 
