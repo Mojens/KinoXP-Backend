@@ -54,15 +54,15 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public void employeeLogin(EmployeeRequest e){
+    public EmployeeResponse employeeLogin(EmployeeRequest e){
         if (!employeeRepository.existsByUserName(e.getUserName())){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
         Employee foundEmployee = employeeRepository.findByUserName(e.getUserName());
         if (BCrypt.checkpw(e.getPassword(),foundEmployee.getPassword())){
-            throw new ResponseStatusException(HttpStatus.ACCEPTED, "Successful login");
+            return new EmployeeResponse(foundEmployee,true);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect password");
-    }
 
+    }
 }

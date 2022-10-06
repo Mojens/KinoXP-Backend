@@ -169,13 +169,14 @@ public class Setup implements ApplicationRunner {
 
         Employee employee1 = Employee.builder()
                 .name("Jens")
-                .type(4)
+                .type(3)
                 .password("test123")
                 .userName("JensAdmin")
                 .build();
+
         Employee employee3 = Employee.builder()
                 .name("Simon")
-                .type(4)
+                .type(2)
                 .password("test123")
                 .userName("SimonOlsen")
                 .build();
