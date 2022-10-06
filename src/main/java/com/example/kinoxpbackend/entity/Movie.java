@@ -107,5 +107,7 @@ public class Movie {
         this.showStartDate = showStartDate;
         this.showEndDate = showEndDate;
 
+
     }
+
 }

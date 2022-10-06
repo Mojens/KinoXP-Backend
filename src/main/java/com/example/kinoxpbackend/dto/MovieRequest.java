@@ -2,12 +2,14 @@ package com.example.kinoxpbackend.dto;
 
 
 import com.example.kinoxpbackend.entity.Movie;
+import com.example.kinoxpbackend.entity.Screening;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,6 +30,7 @@ public class MovieRequest {
     private String trailers;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
+
 
     public static Movie getMovieEntity(MovieRequest m){
         return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.photo,m.stars,m.trailers,m.showStartDate,m.showEndDate);
