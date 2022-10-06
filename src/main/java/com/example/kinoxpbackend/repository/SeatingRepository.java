@@ -13,5 +13,7 @@ public interface SeatingRepository extends JpaRepository<Seatings, Integer> {
 
     SeatResponse getSeatingsById(int id);
 
+    List<SeatResponse> getSeatingsByTheaterId(int id);
+
 
 }
