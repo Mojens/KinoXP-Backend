@@ -28,7 +28,7 @@ public class ShiftService {
 
     public List<ShiftResponse> getShifts(){
         List<Shift> shifts = shiftRepository.findAll();
-        return shifts.stream().map(shift -> new ShiftResponse(shift, false)).toList();
+        return shifts.stream().map(shift -> new ShiftResponse(shift, true)).toList();
     }
 
     public ShiftResponse findShiftById(@PathVariable int id) throws Exception{
