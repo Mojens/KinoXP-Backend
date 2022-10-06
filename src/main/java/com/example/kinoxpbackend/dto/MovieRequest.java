@@ -20,14 +20,17 @@ public class MovieRequest {
     private String description;
     private double rating;
     private String genre;
-    private double duration;
-    private int ageLimit;
+    private String duration;
+    private String ageLimit;
     private double price;
+    private String photo;
+    private String stars;
+    private String trailers;
     private LocalDate showStartDate;
     private LocalDate showEndDate;
 
     public static Movie getMovieEntity(MovieRequest m){
-        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.showStartDate,m.showEndDate);
+        return new Movie(m.id,m.title,m.description,m.rating,m.genre,m.duration,m.ageLimit,m.price,m.photo,m.stars,m.trailers,m.showStartDate,m.showEndDate);
     }
 
     // Movie to MovieRequest conversion

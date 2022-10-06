@@ -17,7 +17,8 @@ public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false, length = 450)
+    @Column(nullable = false, length = 450, columnDefinition = "decimal(10,2) default '0.0'")
+    // default value
     private double performance;
     @Column(nullable = false, length = 450)
     private LocalDateTime startTime;
@@ -55,4 +56,13 @@ public class Screening {
     }
 
 
+    public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater) {
+        this.id = id;
+        this.performance = performance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movie = movie;
+        this.theater = theater;
+
+    }
 }
