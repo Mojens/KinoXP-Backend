@@ -80,7 +80,7 @@ public class MovieService {
     public List<MovieResponse> getMoviesWithScreenings() {
         List<Movie> movies = movieRepository.findAll();
         List<MovieResponse> response = movies.stream().map(MovieResponse::new).collect(Collectors.toList());
-
+        // sort screenings by date
         return response;
 
     }

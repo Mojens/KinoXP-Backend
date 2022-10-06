@@ -156,9 +156,9 @@ public class Setup implements ApplicationRunner {
 
 
         // add screenings
-        Screening screening = new Screening(10, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 10, 23, 10), movie2, theater);
-        Screening screening2 = new Screening(40, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 11, 23, 10), movie, theater2);
-        Screening screening3 = new Screening(30, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 11, 23, 10), movie2, theater);
+        Screening screening = new Screening(10, LocalDateTime.of(2022, 10, 10, 20, 25), LocalDateTime.of(2022, 10, 10, 23, 55), movie2, theater);
+        Screening screening2 = new Screening(40, LocalDateTime.of(2022, 10, 11, 20, 20), LocalDateTime.of(2022, 11, 11, 23, 10), movie, theater2);
+        Screening screening3 = new Screening(30, LocalDateTime.of(2022, 10, 12, 20, 15), LocalDateTime.of(2022, 12, 11, 23, 1), movie2, theater);
 
 
         screeningRepository.save(screening);
