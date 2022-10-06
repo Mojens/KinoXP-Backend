@@ -25,8 +25,15 @@ public class SeatController {
 
     @GetMapping(path = "/{id}")
     public SeatResponse getSeatById(@PathVariable int id) throws Exception {
-
         return seatService.getSeatById(id);
     }
+
+    @GetMapping(path = "/theaterid/{id}")
+    public List<SeatResponse> getSeatsByTheater(@PathVariable int id)throws Exception{
+        System.out.println("test");
+        return seatService.getSeatsByTheaterId(id);
+    }
+
+    
 
 }

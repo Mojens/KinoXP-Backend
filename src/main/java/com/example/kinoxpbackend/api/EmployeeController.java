@@ -50,8 +50,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    void employeeLogin(@RequestBody EmployeeRequest e){
-        employeeService.employeeLogin(e);
+    EmployeeResponse employeeLogin(@RequestBody EmployeeRequest e){
+        return employeeService.employeeLogin(e);
     }
 
 }

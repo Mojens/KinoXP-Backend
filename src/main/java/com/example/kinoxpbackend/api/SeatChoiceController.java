@@ -44,4 +44,6 @@ public class SeatChoiceController {
         seatChoiceService.deleteSeatChoice(id);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
+
 }

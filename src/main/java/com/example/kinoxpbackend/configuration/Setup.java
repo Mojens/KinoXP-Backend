@@ -3,7 +3,6 @@ package com.example.kinoxpbackend.configuration;
 
 import com.example.kinoxpbackend.entity.*;
 import com.example.kinoxpbackend.repository.*;
-import com.example.kinoxpbackend.service.MovieService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -170,13 +169,14 @@ public class Setup implements ApplicationRunner {
 
         Employee employee1 = Employee.builder()
                 .name("Jens")
-                .type(4)
+                .type(3)
                 .password("test123")
                 .userName("JensAdmin")
                 .build();
+
         Employee employee3 = Employee.builder()
                 .name("Simon")
-                .type(4)
+                .type(2)
                 .password("test123")
                 .userName("SimonOlsen")
                 .build();
@@ -215,22 +215,22 @@ public class Setup implements ApplicationRunner {
         reservationRepository.save(reservation3);
 
         SeatChoice seatChoice1 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(8))
+                .seatings(seatRepository.getSeatingById(8))
                 .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice2 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(10))
+                .seatings(seatRepository.getSeatingById(10))
                 .reservation(reservationRepository.getReservationById(2))
                 .build();
 
         SeatChoice seatChoice3 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(1))
+                .seatings(seatRepository.getSeatingById(1))
                 .reservation(reservationRepository.getReservationById(3))
                 .build();
 
         SeatChoice seatChoice4 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(2))
+                .seatings(seatRepository.getSeatingById(2))
                 .reservation(reservationRepository.getReservationById(3))
                 .build();
 
