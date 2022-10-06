@@ -79,16 +79,15 @@ public class ReservationService {
 
     private String getSafetyId(int lenght){
         Random random = new Random();
-        String chars = "0123456789";
         String safetyId;
         do {
             safetyId = "";
             for (int i = 0; i < lenght; i++) {
-                safetyId += chars.charAt(random.nextInt(chars.length() - 1));
+                safetyId += random.nextInt(10);
             }
         }while(reservationRepository.existsBySafetyId(safetyId));
+
         return safetyId;
     }
-
 
 }
