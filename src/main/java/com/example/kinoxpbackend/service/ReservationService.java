@@ -1,14 +1,14 @@
 package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.*;
-import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Reservation;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.repository.ReservationRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
+import com.example.kinoxpbackend.repository.SeatingRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -20,9 +20,15 @@ public class ReservationService {
 
     ScreeningRepository screeningRepository;
 
-    public ReservationService(ReservationRepository reservationRepository, ScreeningRepository screeningRepository){
+    SeatChoiceService seatChoiceService;
+
+    SeatingRepository seatingRepository;
+
+    public ReservationService(ReservationRepository reservationRepository, ScreeningRepository screeningRepository, SeatChoiceService seatChoiceService, SeatingRepository seatingRepository){
         this.reservationRepository = reservationRepository;
         this.screeningRepository = screeningRepository;
+        this.seatChoiceService = seatChoiceService;
+        this.seatingRepository = seatingRepository;
     }
 
 
@@ -79,16 +85,34 @@ public class ReservationService {
 
     private String getSafetyId(int lenght){
         Random random = new Random();
-        String chars = "0123456789";
         String safetyId;
         do {
             safetyId = "";
             for (int i = 0; i < lenght; i++) {
-                safetyId += chars.charAt(random.nextInt(chars.length() - 1));
+                safetyId += random.nextInt(10);
             }
         }while(reservationRepository.existsBySafetyId(safetyId));
+
         return safetyId;
     }
 
+    public List<ReservationResponse> getReservationsFromScreeningId(int id) {
+        return reservationRepository.getReservationsByScreeningId(id);
+    }
 
+
+    public List<SeatResponse> getSeatChoicesByScreening(int id){
+        List<ReservationResponse> resResponseList = reservationRepository.getReservationsByScreeningId(id);
+        ArrayList<SeatResponse> seatResponses = new ArrayList<>();
+        for (ReservationResponse rr : resResponseList) {
+            int resId = rr.getId();
+            List<SeatChoiceResponse> scrs = seatChoiceService.getSeatChoiceByReservationId(resId);
+            for (SeatChoiceResponse scr : scrs) {
+                seatResponses.add(seatingRepository.getSeatingsById(scr.getSeatingsId()));
+            }
+
+        }
+
+        return seatResponses;
+    }
 }

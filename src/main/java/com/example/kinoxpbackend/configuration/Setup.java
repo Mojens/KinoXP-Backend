@@ -25,6 +25,7 @@ public class Setup implements ApplicationRunner {
     ReservationRepository reservationRepository;
     SeatChoiceRepository seatChoiceRepository;
 
+
     public Setup(MovieRepository movieRepository,
                  ScreeningRepository screeningRepository,
                  TheaterRepository theaterRepository,
@@ -41,6 +42,7 @@ public class Setup implements ApplicationRunner {
         this.employeeRepository = employeeRepository;
         this.reservationRepository = reservationRepository;
         this.seatChoiceRepository = seatChoiceRepository;
+
     }
 
 
@@ -60,6 +62,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi362988313/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
         // COpy movie2 as a build
@@ -75,6 +78,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi324468761/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
         // Copy movie3 as a build
@@ -90,6 +94,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi144884505/")
                 .showStartDate(LocalDate.of(2022,10,22))
                 .showEndDate(LocalDate.of(2022,12,22))
+                .screenings(new ArrayList<>())
                 .build();
 
 
@@ -106,6 +111,7 @@ public class Setup implements ApplicationRunner {
                 .trailers("https://www.imdb.com/video/vi3215114777/")
                 .showStartDate(LocalDate.of(2022, 10, 10))
                 .showEndDate(LocalDate.of(2022, 12, 26))
+                .screenings(new ArrayList<>())
                 .build();
 
 
@@ -149,9 +155,9 @@ public class Setup implements ApplicationRunner {
 
 
         // add screenings
-        Screening screening = new Screening(10, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 10, 23, 10), movie2, theater);
-        Screening screening2 = new Screening(40, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 11, 23, 10), movie, theater2);
-        Screening screening3 = new Screening(30, LocalDateTime.of(2022, 10, 10, 20, 10), LocalDateTime.of(2022, 10, 11, 23, 10), movie2, theater);
+        Screening screening = new Screening(10, LocalDateTime.of(2022, 10, 10, 20, 25), LocalDateTime.of(2022, 10, 10, 23, 55), movie2, theater);
+        Screening screening2 = new Screening(40, LocalDateTime.of(2022, 10, 11, 20, 20), LocalDateTime.of(2022, 11, 11, 23, 10), movie, theater2);
+        Screening screening3 = new Screening(30, LocalDateTime.of(2022, 10, 12, 20, 15), LocalDateTime.of(2022, 12, 11, 23, 1), movie2, theater);
 
 
         screeningRepository.save(screening);
@@ -159,15 +165,18 @@ public class Setup implements ApplicationRunner {
         screeningRepository.save(screening3);
 
 
+
+
         Employee employee1 = Employee.builder()
                 .name("Jens")
-                .type(4)
+                .type(3)
                 .password("test123")
                 .userName("JensAdmin")
                 .build();
+
         Employee employee3 = Employee.builder()
                 .name("Simon")
-                .type(4)
+                .type(2)
                 .password("test123")
                 .userName("SimonOlsen")
                 .build();
@@ -206,22 +215,22 @@ public class Setup implements ApplicationRunner {
         reservationRepository.save(reservation3);
 
         SeatChoice seatChoice1 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(8))
+                .seatings(seatRepository.getSeatingById(8))
                 .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice2 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(10))
+                .seatings(seatRepository.getSeatingById(10))
                 .reservation(reservationRepository.getReservationById(2))
                 .build();
 
         SeatChoice seatChoice3 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(1))
+                .seatings(seatRepository.getSeatingById(1))
                 .reservation(reservationRepository.getReservationById(3))
                 .build();
 
         SeatChoice seatChoice4 = SeatChoice.builder()
-                .seatings(seatRepository.getSeatingsById(2))
+                .seatings(seatRepository.getSeatingById(2))
                 .reservation(reservationRepository.getReservationById(3))
                 .build();
 

@@ -38,6 +38,8 @@ public class ScreeningService {
                 System.out.println(s);
             }
         }
+        // sort by date
+
         return screeningList.stream().map(screening -> new ScreeningResponse(screening)).toList();
     }
     // get screening by id
@@ -54,6 +56,7 @@ public class ScreeningService {
         newScreening = screeningRepository.save(newScreening);
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        screeningRepository.save(newScreening);
 
 
         return new ScreeningResponse(newScreening);

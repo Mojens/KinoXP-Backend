@@ -5,10 +5,7 @@ import com.example.kinoxpbackend.entity.Reservation;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Theater;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScreeningRequest {
 
     private int id;

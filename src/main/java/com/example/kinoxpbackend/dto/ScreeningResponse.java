@@ -14,7 +14,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@Builder
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScreeningResponse {
 
@@ -22,9 +23,9 @@ public class ScreeningResponse {
     private int id;
     private double performance;
     // format json dateTime
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm",shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime startTime;
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm",shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime endTime;
     private int movieId;
     private int theaterId;
@@ -37,4 +38,16 @@ public class ScreeningResponse {
         this.movieId = screening.getMovie().getId();
         this.theaterId = screening.getTheater().getId();
     }
+
+    public boolean hasScreenings (Movie movie, List<Screening> screenings) {
+        for (Screening s : screenings) {
+            if (s.getMovie().getId() == movie.getId()) {
+                return true;
+
+            }
+        }
+        return false;
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.kinoxpbackend.api;
 
 import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.MovieResponse;
+import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -23,8 +25,8 @@ public class MovieController {
 
     // get all movies
     @GetMapping
-    public List<MovieResponse> getMovies(){
-        return movieService.getAllMovies();
+    List<MovieResponse> getMoviesWithScreenings(){
+        return movieService.getMoviesWithScreenings();
     }
 
 
@@ -53,4 +55,8 @@ public class MovieController {
 
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
+
+
+
 }

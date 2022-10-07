@@ -1,5 +1,6 @@
 package com.example.kinoxpbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,9 @@ public class Screening {
     // default value
     private double performance;
     @Column(nullable = false, length = 450)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(nullable = false, length = 450)
     private LocalDateTime endTime;
 
