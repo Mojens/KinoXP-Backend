@@ -1,5 +1,8 @@
 package com.example.kinoxpbackend.service;
 
+import com.example.kinoxpbackend.dto.ScreeningRequest;
+import com.example.kinoxpbackend.dto.ScreeningResponse;
+import com.example.kinoxpbackend.dto.ShiftRequest;
 import com.example.kinoxpbackend.dto.ShiftResponse;
 import com.example.kinoxpbackend.entity.Employee;
 import com.example.kinoxpbackend.entity.Shift;
@@ -56,10 +59,29 @@ class ShiftServiceTest {
 
     @Test
     void addShift() {
+        Shift shift2 = Shift.builder()
+                .startTime(LocalDateTime.of(2023, 9, 10, 23, 32, 32))
+                .endTime(LocalDateTime.of(2023, 9, 18, 23, 32, 32))
+                .employee(employee)
+                .build();
+        ShiftRequest shiftRequest = new ShiftRequest(shift2);
+        shiftService.addShift(employee.getId(), LocalDateTime.of(2023, 9, 10, 23, 32, 32), LocalDateTime.of(2023, 9, 10, 10, 32, 32));
+        List<ShiftResponse> shiftResponses = shiftService.getShifts();
+        assertEquals(2, shiftResponses.size());
+        assertEquals(shiftResponses.get(1).getStartTime(), LocalDateTime.of(2023, 9, 10, 23, 32, 32));
     }
 
     @Test
     void editShift() {
+        Shift shift3 = Shift.builder()
+                .startTime(LocalDateTime.of(2023, 9, 10, 23, 32, 32))
+                .endTime(LocalDateTime.of(2023, 9, 18, 23, 32, 32))
+                .employee(employee)
+                .build();
+        ShiftRequest shiftRequest = new ShiftRequest(shift3);
+        ShiftService.editShift(shiftRequest, 3);
+        List<ShiftResponse> shiftResponses = shiftService.getShifts();
+        assertEquals(1, shiftResponses.get(0).getEmployeeId());
     }
 
     @Test
