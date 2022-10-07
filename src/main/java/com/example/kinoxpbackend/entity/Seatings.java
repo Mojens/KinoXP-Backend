@@ -31,9 +31,4 @@ public class Seatings {
         this.theater = theater;
     }
 
-    public Seatings(String row, int number) {
-        this.rowNum = row;
-        this.seatNumber = number;
-    }
-
 }

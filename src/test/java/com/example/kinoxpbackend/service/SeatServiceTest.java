@@ -9,6 +9,7 @@ class SeatServiceTest {
     @Test
     void getAllSeats() {
 
+
     }
 
     @Test
