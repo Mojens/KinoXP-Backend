@@ -1,6 +1,7 @@
 package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.EmployeeResponse;
+import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
 import com.example.kinoxpbackend.entity.Movie;
@@ -12,6 +13,8 @@ import com.example.kinoxpbackend.repository.TheaterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -56,7 +59,7 @@ public class ScreeningService {
         Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
         newScreening = screeningRepository.save(newScreening);
 
-        //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+
         screeningRepository.save(newScreening);
 
 
@@ -83,6 +86,31 @@ public class ScreeningService {
     }
 
     // add all screenings to movie between two dates
+    public ScreeningResponse addScreeningsToMovie(ScreeningRequest screeningRequest) {
+        if (screeningRepository.existsScreeningById(screeningRequest.getId())) {
+            throw new RuntimeException("Screening with this ID already exist");
+        }
+
+        Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        // get movie showStart and showEnd
+        Movie movie = movieRepository.findById(screeningRequest.getMovieId()).orElseThrow(() -> new RuntimeException("Movie not found"));
+        LocalDate showStart = movie.getShowStartDate();
+        LocalDate showEnd = movie.getShowEndDate();
+        // difference between showStart and showEnd
+        int days = showEnd.getDayOfYear() - showStart.getDayOfYear();
+
+        for (int i = 0; i < days; i++) {
+
+            newScreening.setStartTime(newScreening.getStartTime().plusDays(i));
+            newScreening.setEndTime(newScreening.getEndTime().plusDays(i));
+            screeningRepository.save(newScreening);
+            newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+
+        }
+
+        return new ScreeningResponse(newScreening);
+        }
+
 
 
 

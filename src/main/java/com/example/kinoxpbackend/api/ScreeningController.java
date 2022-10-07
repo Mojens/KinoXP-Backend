@@ -1,5 +1,6 @@
 package com.example.kinoxpbackend.api;
 
+import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
 import com.example.kinoxpbackend.service.ScreeningService;
@@ -49,6 +50,12 @@ public class ScreeningController {
     ResponseEntity<Boolean> deleteScreening(@PathVariable int id) {
          screeningService.deleteScreening(id);
             return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/all")
+    public ScreeningResponse addMultiScreening(@RequestBody ScreeningRequest screening) {
+
+        return screeningService.addScreeningsToMovie(screening);
     }
 
 
