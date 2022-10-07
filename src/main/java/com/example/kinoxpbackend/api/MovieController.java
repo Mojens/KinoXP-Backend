@@ -4,6 +4,7 @@ import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.MovieResponse;
 import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.service.MovieService;
+import com.example.kinoxpbackend.service.ScreeningService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,17 @@ import java.util.Map;
 public class MovieController {
 
     MovieService movieService;
+    ScreeningService screeningService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, ScreeningService screeningService) {
         this.movieService = movieService;
+        this.screeningService = screeningService;
     }
 
     // get all movies
     @GetMapping
     List<MovieResponse> getMoviesWithScreenings(){
+        screeningService.updateAllPerformance();
         return movieService.getMoviesWithScreenings();
     }
 

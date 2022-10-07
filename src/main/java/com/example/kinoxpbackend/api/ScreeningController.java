@@ -23,12 +23,21 @@ public class ScreeningController {
     // Get all screenings
     @GetMapping
     public List<ScreeningResponse> getScreenings() {
+
+        // update performance on all screenings
+
+        screeningService.updateAllPerformance();
+
+
         return screeningService.getAllScreenings();
     }
 
     // Get screening by id
     @GetMapping(path = "/{id}")
     public ScreeningResponse getScreeningById(@PathVariable int id) throws Exception {
+        screeningService.updatePerformance(id);
+        screeningService.setWeeklyPerformance(id);
+        System.out.println("Weekly Performance = " + screeningService.getWeeklyPerformance(id));
         return screeningService.getScreeningById(id);
     }
 

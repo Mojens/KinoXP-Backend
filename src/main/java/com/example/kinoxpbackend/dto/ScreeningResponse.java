@@ -21,6 +21,7 @@ public class ScreeningResponse {
 
 
     private int id;
+    private double weeklyPerformance;
     private double performance;
     // format json dateTime
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
@@ -32,6 +33,7 @@ public class ScreeningResponse {
 
     public ScreeningResponse(Screening screening) {
         this.id = screening.getId();
+        this.weeklyPerformance = screening.getWeeklyPerformance();
         this.performance = screening.getPerformance();
         this.startTime = screening.getStartTime();
         this.endTime = screening.getEndTime();

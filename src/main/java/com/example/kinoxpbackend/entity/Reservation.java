@@ -38,7 +38,10 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private List<SeatChoice> seatChoices = new ArrayList<>();
 
-
+    // get booked seats from reservation
+    public List<SeatChoice> getSeatChoices() {
+        return seatChoices;
+    }
 
     public Reservation(String email, String phoneNumber, int employeeId, String safetyId, Screening screening) {
         this.email = email;

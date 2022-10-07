@@ -22,6 +22,9 @@ public class Theater {
     private List<Seatings> seatings = new ArrayList<>();
 
 
+    // get number of seats in theater
+
+
     public Theater() {
     }
 
