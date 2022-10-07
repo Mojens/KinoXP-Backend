@@ -28,5 +28,9 @@ public class SeatService {
         Seatings seat = seatRepository.findById(id).orElseThrow(() -> new RuntimeException("Seat not found"));
         return new SeatResponse(seat);
     }
+
+    public List<SeatResponse> getSeatsByTheaterId(int theaterId) {
+        return seatRepository.getSeatingsByTheaterId(theaterId);
+    }
 }
 

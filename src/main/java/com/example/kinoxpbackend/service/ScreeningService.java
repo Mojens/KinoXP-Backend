@@ -38,6 +38,8 @@ public class ScreeningService {
                 System.out.println(s);
             }
         }
+        // sort by date
+
         return screeningList.stream().map(screening -> new ScreeningResponse(screening)).toList();
     }
     // get screening by id
@@ -50,18 +52,14 @@ public class ScreeningService {
         if (screeningRepository.existsScreeningById(screeningRequest.getId())) {
             throw new RuntimeException("Screening with this ID already exist");
         }
-        Screening createdScreening = Screening.builder()
-            .performance(screeningRequest.getPerformance())
-            .startTime(screeningRequest.getStartTime())
-            .endTime(screeningRequest.getEndTime())
-            .movie(movieRepository.findMovieById(screeningRequest.getMovieId()))
-            .theater(theaterRepository.findTheaterById(screeningRequest.getTheaterId()))
-            .build();
+        Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        newScreening = screeningRepository.save(newScreening);
 
         //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
-        screeningRepository.save(createdScreening);
+        screeningRepository.save(newScreening);
 
-        return new ScreeningResponse(createdScreening);
+
+        return new ScreeningResponse(newScreening);
     }
 
     // edit screening
@@ -71,6 +69,8 @@ public class ScreeningService {
         screening.setPerformance(screeningRequest.getPerformance());
         screening.setStartTime(screeningRequest.getStartTime());
         screening.setEndTime(screeningRequest.getEndTime());
+
+        screeningRepository.save(screening);
     }
 
     // delete screening

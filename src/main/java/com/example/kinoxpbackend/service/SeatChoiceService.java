@@ -1,9 +1,6 @@
 package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.*;
-import com.example.kinoxpbackend.entity.Movie;
-import com.example.kinoxpbackend.entity.Reservation;
-import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.SeatChoice;
 import com.example.kinoxpbackend.repository.ReservationRepository;
 import com.example.kinoxpbackend.repository.SeatChoiceRepository;
@@ -43,7 +40,7 @@ public class SeatChoiceService {
             throw new RuntimeException("SeatChoice with this ID already exist");
         }
         SeatChoice createdSeatChoice = SeatChoice.builder()
-                .seatings(seatingRepository.getSeatingsById(seatChoiceRequest.getSeatingsId()))
+                .seatings(seatingRepository.getSeatingById(seatChoiceRequest.getSeatingsId()))
                 .reservation(reservationRepository.getReservationById(seatChoiceRequest.getReservationId()))
                 .build();
 
@@ -56,7 +53,7 @@ public class SeatChoiceService {
     public void editSeatChoice(SeatChoiceRequest seatChoiceRequest, int id) {
         SeatChoice seatChoice = seatChoiceRepository.findById(id).orElseThrow(() -> new RuntimeException("SeatChoice with this ID does not exist"));
 
-        seatChoice.setSeatings(seatingRepository.getSeatingsById(seatChoiceRequest.getSeatingsId()));
+        seatChoice.setSeatings(seatingRepository.getSeatingById(seatChoiceRequest.getSeatingsId()));
         seatChoice.setReservation(reservationRepository.getReservationById(seatChoiceRequest.getReservationId()));
         seatChoiceRepository.save(seatChoice);
     }
@@ -66,4 +63,7 @@ public class SeatChoiceService {
         seatChoiceRepository.delete(seatChoice);
     }
 
+    public List<SeatChoiceResponse> getSeatChoiceByReservationId(int id) {
+        return seatChoiceRepository.getSeatChoicesByReservationId(id);
+    }
 }

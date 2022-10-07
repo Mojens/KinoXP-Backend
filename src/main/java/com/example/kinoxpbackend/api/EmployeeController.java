@@ -48,4 +48,10 @@ public class EmployeeController {
     void deleteEmployeeByID(@PathVariable int id){
         employeeService.deleteEmployeeById(id);
     }
+
+    @PostMapping("/login")
+    EmployeeResponse employeeLogin(@RequestBody EmployeeRequest e){
+        return employeeService.employeeLogin(e);
+    }
+
 }
