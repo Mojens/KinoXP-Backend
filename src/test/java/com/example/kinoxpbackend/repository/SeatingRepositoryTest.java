@@ -25,10 +25,13 @@ class SeatingRepositoryTest {
 
     static Seatings seat3;
 
+    static Theater theater1;
+
     @BeforeAll
     public static void setUpData(@Autowired SeatingRepository seatingRepository) {
-        Seatings s1 = new Seatings("A", 2);
-        Seatings s2 = new Seatings("B", 20);
+        Theater t1 = new Theater(1);
+        Seatings s1 = new Seatings("A", 2, t1);
+        Seatings s2 = new Seatings("B", 20, t1);
 
         seatingRepository.save(s1);
         seatingRepository.save(s2);
