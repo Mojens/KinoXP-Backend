@@ -22,7 +22,7 @@ public class EmployeeService {
 
     public List<EmployeeResponse> getEmployees(){
         List<Employee> employees = employeeRepository.findAll();
-         return employees.stream().map(employee -> new EmployeeResponse(employee, false)).toList();
+         return employees.stream().map(employee -> new EmployeeResponse(employee, true)).toList();
     }
 
     public EmployeeResponse findById(@PathVariable int id) throws Exception{

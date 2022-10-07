@@ -38,6 +38,8 @@ public class ScreeningService {
                 System.out.println(s);
             }
         }
+        // sort by date
+
         return screeningList.stream().map(screening -> new ScreeningResponse(screening)).toList();
     }
     // get screening by id

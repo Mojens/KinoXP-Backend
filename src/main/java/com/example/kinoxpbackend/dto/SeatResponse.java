@@ -27,4 +27,8 @@ public class SeatResponse {
         this.theaterId = seatings.getTheater().getId();
 
     }
+
+
+
+
 }
