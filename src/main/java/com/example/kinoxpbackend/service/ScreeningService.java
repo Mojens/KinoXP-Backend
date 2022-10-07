@@ -3,6 +3,7 @@ package com.example.kinoxpbackend.service;
 import com.example.kinoxpbackend.dto.EmployeeResponse;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
+import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.entity.Screening;
 import com.example.kinoxpbackend.entity.Shift;
 import com.example.kinoxpbackend.repository.MovieRepository;
@@ -80,4 +81,12 @@ public class ScreeningService {
         }
         screeningRepository.deleteById(id);
     }
+
+    // add all screenings to movie between two dates
+
+
+
+
+
+
 }
