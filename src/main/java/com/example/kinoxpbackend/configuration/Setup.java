@@ -123,8 +123,8 @@ public class Setup implements ApplicationRunner {
           .build();
 
       Shift shift1 = Shift.builder()
-          .startTime(LocalDateTime.now())
-          .endTime(LocalDateTime.now().plusHours(8))
+          .startTime(LocalDateTime.of(2022,10,10,9,0))
+          .endTime(LocalDateTime.of(2022,10,10,17,0))
           .employee(employee1)
           .build();
 

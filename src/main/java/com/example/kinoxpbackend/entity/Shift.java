@@ -1,6 +1,7 @@
 package com.example.kinoxpbackend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,9 +20,11 @@ public class Shift {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   @Column(nullable = false)
   private LocalDateTime startTime;
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   @Column(nullable = false)
   private LocalDateTime endTime;
 
