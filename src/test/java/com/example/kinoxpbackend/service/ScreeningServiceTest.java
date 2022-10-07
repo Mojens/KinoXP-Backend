@@ -53,7 +53,7 @@ class ScreeningServiceTest {
         theaterRepository.save(theater2);
 
         Screening screening1 = new Screening(10, LocalDateTime.of(2022,9,9,10,10), LocalDateTime.of(2022,9,9,11,50), movie1, theater1);
-        Screening screening2 = new Screening(10, LocalDateTime.of(2022,9,9,10,10), LocalDateTime.of(2022,9,9,11,50), movie2,  theater2);
+        Screening screening2 = new Screening(20, LocalDateTime.of(2022,9,9,10,10), LocalDateTime.of(2022,9,9,11,50), movie2,  theater2);
         Screening screening3 = new Screening(120, LocalDateTime.of(2022,9,9,10,10), LocalDateTime.of(2022,9,9,11,50), movie2,  theater2);
         screeningRepository.save(screening1);
         screeningRepository.save(screening2);
@@ -88,13 +88,24 @@ class ScreeningServiceTest {
         screeningService.addScreening(screeningRequest);
         List<ScreeningResponse> screeningResponses = screeningService.getAllScreenings();
         assertEquals(3, screeningResponses.size());
+        assertEquals(120, screeningResponses.get(2).getPerformance());
+        assertNotEquals(2, screeningResponses.size());
     }
 
     @Test
     void editScreening() {
+        ScreeningRequest screeningRequest = new ScreeningRequest(sc3);
+        screeningService.editScreening(screeningRequest, 1);
+        List<ScreeningResponse> screeningResponses = screeningService.getAllScreenings();
+        assertEquals(120, screeningResponses.get(0).getPerformance());
+
     }
 
     @Test
     void deleteScreening() {
+        screeningService.deleteScreening(2);
+        List<ScreeningResponse> screeningResponses = screeningService.getAllScreenings();
+        assertEquals(1, screeningResponses.size());
+        assertEquals(10, screeningResponses.get(0).getPerformance());
     }
 }
