@@ -221,17 +221,17 @@ public class Setup implements ApplicationRunner {
 
         SeatChoice seatChoice2 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(10))
-                .reservation(reservationRepository.getReservationById(2))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice3 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(1))
-                .reservation(reservationRepository.getReservationById(3))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice4 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(2))
-                .reservation(reservationRepository.getReservationById(3))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         seatChoiceRepository.save(seatChoice1);
