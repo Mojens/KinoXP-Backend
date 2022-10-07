@@ -70,6 +70,7 @@ public class SeatChoiceService {
 
      public List<SeatChoiceResponse> addListChoiceList(List<SeatChoiceRequest> seatChoiceRequest) {
         List<SeatChoiceResponse> seatChoiceResponses = new ArrayList<>();
+         System.out.println(seatChoiceRequest);
         for (SeatChoiceRequest e : seatChoiceRequest){
             SeatChoice createdSeatChoice = SeatChoice.builder()
                     .seatings(seatingRepository.getSeatingById(e.getSeatingsId()))
