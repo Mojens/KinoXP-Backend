@@ -25,6 +25,7 @@ class SeatServiceTest {
     SeatService seatService;
 
     SeatResponse staticSeatResponse;
+    SeatResponse staticSeatResponse2;
 
     @BeforeEach
     public void initData(@Autowired SeatingRepository seatingRepository, @Autowired TheaterRepository theaterRepository) {
@@ -39,6 +40,7 @@ class SeatServiceTest {
         seatingRepository.save(s2);
 
         staticSeatResponse = new SeatResponse(s2);
+        staticSeatResponse2 = new SeatResponse(s1);
 
         seatService = new SeatService(seatingRepository);
     }
@@ -56,6 +58,7 @@ class SeatServiceTest {
     void getSeatById() throws Exception {
         SeatResponse seatResponse = seatService.getSeatById(2);
         assertEquals(seatResponse.getId(), staticSeatResponse.getId());
+        assertNotEquals(seatResponse.getId(), staticSeatResponse2.getId());
     }
 
     @Test

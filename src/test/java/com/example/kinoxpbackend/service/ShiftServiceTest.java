@@ -50,7 +50,8 @@ class ShiftServiceTest {
     @Test
     void getShifts() {
         List<ShiftResponse> shifts = shiftService.getShifts();
-        assertEquals(shifts.size(),1);
+        assertEquals(1,shifts.size());
+        assertNotEquals(3, shifts.size());
     }
 
     @Test
