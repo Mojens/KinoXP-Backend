@@ -83,7 +83,7 @@ public class ReservationService {
     }
 
 
-    private String getSafetyId(int lenght){
+    public String getSafetyId(int lenght){
         Random random = new Random();
         String safetyId;
         do {
