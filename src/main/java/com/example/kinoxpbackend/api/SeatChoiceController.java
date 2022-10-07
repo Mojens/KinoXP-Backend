@@ -1,7 +1,5 @@
 package com.example.kinoxpbackend.api;
 
-import com.example.kinoxpbackend.dto.ScreeningRequest;
-import com.example.kinoxpbackend.dto.ScreeningResponse;
 import com.example.kinoxpbackend.dto.SeatChoiceRequest;
 import com.example.kinoxpbackend.dto.SeatChoiceResponse;
 import com.example.kinoxpbackend.service.SeatChoiceService;
@@ -43,6 +41,11 @@ public class SeatChoiceController {
     ResponseEntity<Boolean> deleteSeatChoice(@PathVariable int id) {
         seatChoiceService.deleteSeatChoice(id);
         return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @PostMapping(path= "/list", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    List <SeatChoiceResponse> addSeatChoiceList(@RequestBody List<SeatChoiceRequest> seatChoiceRequest) {
+        return seatChoiceService.addListChoiceList(seatChoiceRequest);
     }
 
 

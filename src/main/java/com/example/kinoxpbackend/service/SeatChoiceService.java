@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,5 +66,18 @@ public class SeatChoiceService {
 
     public List<SeatChoiceResponse> getSeatChoiceByReservationId(int id) {
         return seatChoiceRepository.getSeatChoicesByReservationId(id);
+    }
+
+     public List<SeatChoiceResponse> addListChoiceList(List<SeatChoiceRequest> seatChoiceRequest) {
+        List<SeatChoiceResponse> seatChoiceResponses = new ArrayList<>();
+        for (SeatChoiceRequest e : seatChoiceRequest){
+            SeatChoice createdSeatChoice = SeatChoice.builder()
+                    .seatings(seatingRepository.getSeatingById(e.getSeatingsId()))
+                    .reservation(reservationRepository.getReservationById(e.getReservationId()))
+                    .build();
+            seatChoiceRepository.save(createdSeatChoice);
+            seatChoiceResponses.add(new SeatChoiceResponse(createdSeatChoice));
+        }
+        return seatChoiceResponses;
     }
 }
