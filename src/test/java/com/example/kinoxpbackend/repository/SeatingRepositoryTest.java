@@ -28,8 +28,6 @@ class SeatingRepositoryTest {
 
     static Seatings seat3;
 
-    static Theater theater1;
-
     @BeforeAll
     public static void setUpData(@Autowired SeatingRepository seatingRepository, @Autowired TheaterRepository theaterRepository) {
         Theater t1 = new Theater(1);
