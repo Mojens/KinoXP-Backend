@@ -101,7 +101,7 @@ class MovieServiceTest {
                 .price(140)
                 .photo("https://imgcdn.saxo.com/_9788702173222")
                 .stars("Daniel Radcliff, Hermione Granger, Ron Weasley")
-                .trailers("https://www.youtube.com/watch?v=BIhNsAtPbPI&ab_channel=JamesBond007")
+                .trailers("https://www.youtube.com/watch?v=VyHV0BRtdxo&ab_channel=RottenTomatoesClassicTrailers")
                 .showStartDate(LocalDate.of(2022, 10, 11))
                 .showEndDate(LocalDate.of(2022, 1, 1))
                 .screenings(new ArrayList<>())
@@ -111,11 +111,56 @@ class MovieServiceTest {
 
         String actualDescription = addedMovie.getDescription();
 
+        assertEquals(expectedDescription, actualDescription);
+
 
 
     }
 
     @Test
     void deleteMovie() {
+
+        int amountBeforeDeleting = movieRepository.findAll().size();
+        movieRepository.deleteById(1);
+        int amountAfterDeleting = movieRepository.findAll().size();
+
+
+        //ExpectedResults
+        int expectedBeforeDeleting = 3;
+        int expectedAfterDeleting = 2;
+
+        //Asserting
+        assertEquals(amountBeforeDeleting, expectedBeforeDeleting);
+        assertEquals(amountAfterDeleting, expectedAfterDeleting);
+    }
+
+    @Test
+    void editMovie() {
+        String ageLimit = "20";
+        Movie movieToEdit = movieRepository.findMovieById(1);
+        String ageLimitBefore = movieToEdit.getAgeLimit();
+
+        //Changing the agelimit to what i set in the start.
+        movieToEdit.setAgeLimit(ageLimit);
+
+        //Saving the edited movie
+        movieRepository.save(movieToEdit);
+
+        //Finding the agelimit after the save
+        Movie editedMovie = movieRepository.findMovieById(1);
+        String ageLimitAfter = editedMovie.getAgeLimit();
+
+
+        //Actual result
+        boolean actualResult = ageLimitAfter.equals(ageLimitBefore);
+
+        //Expected result
+        boolean expectedResult = false;
+        assertEquals(actualResult, expectedResult);
+
+
+
+
+
     }
 }
