@@ -3,6 +3,7 @@ package com.example.kinoxpbackend.configuration;
 
 import com.example.kinoxpbackend.entity.*;
 import com.example.kinoxpbackend.repository.*;
+import com.example.kinoxpbackend.service.ReservationService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class Setup implements ApplicationRunner {
     ShiftRepository shiftRepository;
     ReservationRepository reservationRepository;
     SeatChoiceRepository seatChoiceRepository;
+    ReservationService reservationService;
 
 
     public Setup(MovieRepository movieRepository,
@@ -33,7 +35,8 @@ public class Setup implements ApplicationRunner {
                  ShiftRepository shiftRepository,
                  EmployeeRepository employeeRepository,
                  ReservationRepository reservationRepository,
-                 SeatChoiceRepository seatChoiceRepository) {
+                 SeatChoiceRepository seatChoiceRepository,
+                 ReservationService reservationService) {
         this.movieRepository = movieRepository;
         this.screeningRepository = screeningRepository;
         this.theaterRepository = theaterRepository;
@@ -42,6 +45,7 @@ public class Setup implements ApplicationRunner {
         this.employeeRepository = employeeRepository;
         this.reservationRepository = reservationRepository;
         this.seatChoiceRepository = seatChoiceRepository;
+        this.reservationService = reservationService;
 
     }
 
@@ -207,9 +211,9 @@ public class Setup implements ApplicationRunner {
         shiftRepository.save(shift1);
         shiftRepository.save(shift2);
 
-        Reservation reservation1 = new Reservation("Jan", "61426729", 1, "h", screeningRepository.findScreeningById(1));
-        Reservation reservation2 = new Reservation("Bo", "61426786", 2, "ui", screeningRepository.findScreeningById(2));
-        Reservation reservation3 = new Reservation("Lars", "61426700", 3, "a", screeningRepository.findScreeningById(3));
+        Reservation reservation1 = new Reservation("Jan@gmail.com", "61426729", 1, reservationService.getSafetyId(16), screeningRepository.findScreeningById(1));
+        Reservation reservation2 = new Reservation("Bo.jensen@hotmail.com", "61426786", 2, reservationService.getSafetyId(16), screeningRepository.findScreeningById(2));
+        Reservation reservation3 = new Reservation("Lars.larsen@gmail.com", "61426700", 3, reservationService.getSafetyId(16), screeningRepository.findScreeningById(3));
         reservationRepository.save(reservation1);
         reservationRepository.save(reservation2);
         reservationRepository.save(reservation3);
