@@ -104,12 +104,14 @@ class ShiftServiceTest {
 
     @Test
     void editShift() {
-        ShiftRequest shiftRequest = new ShiftRequest(shift);
-        shiftService.editShift(shiftRequest, 1);
 
     }
 
     @Test
     void deleteShiftById() {
+        shiftService.deleteShiftById(2);
+        List<ShiftResponse> shiftResponses = shiftService.getShifts();
+        assertEquals(1, shiftResponses.size());
+        assertEquals(1, shiftResponses.get(0).getEmployeeId());
     }
 }
