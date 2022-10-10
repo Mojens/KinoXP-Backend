@@ -15,9 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class SeatingRepositoryTest {
-    /*
+
     @Autowired
     SeatingRepository seatingRepository;
+
+    @Autowired
+    TheaterRepository theaterRepository;
 
     static Seatings seat1;
 
@@ -25,16 +28,16 @@ class SeatingRepositoryTest {
 
     static Seatings seat3;
 
-    static Theater theater1;
-
     @BeforeAll
-    public static void setUpData(@Autowired SeatingRepository seatingRepository) {
+    public static void setUpData(@Autowired SeatingRepository seatingRepository, @Autowired TheaterRepository theaterRepository) {
         Theater t1 = new Theater(1);
+        theaterRepository.save(t1);
         Seatings s1 = new Seatings("A", 2, t1);
         Seatings s2 = new Seatings("B", 20, t1);
 
         seatingRepository.save(s1);
         seatingRepository.save(s2);
+
 
         seat1 = s1;
         seat2 = s2;
@@ -55,19 +58,20 @@ class SeatingRepositoryTest {
         assertEquals(idFromRepo, idFromStatic);
     }
 
+
     @Test
     void getSeatingsById() {
         SeatResponse seatingResponseFromRepo = seatingRepository.getSeatingsById(1);
-        SeatResponse seatResponseFromStatic = seatingRepository.getSeatingsById(3);
-        assertEquals(seatingResponseFromRepo, seatResponseFromStatic);
+        assertEquals(seatingResponseFromRepo.getId(), seat1.getId());
+        assertNotEquals(seatingResponseFromRepo.getId(), seat2.getId());
     }
+
+
 
     @Test
     void getSeatingsByTheaterId() {
+        List<SeatResponse> listOfSeatings = seatingRepository.getSeatingsByTheaterId(1);
+        assertEquals(listOfSeatings.size(), 2);
     }
-    */
-
-
-
 
 }
