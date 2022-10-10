@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class SeatingRepositoryTest {
-
+/*
     @Autowired
     SeatingRepository seatingRepository;
 
@@ -42,7 +42,7 @@ class SeatingRepositoryTest {
         seatingRepository.save(seat3);
     }
 
-    /*
+
     @Test
     void existsSeatingsById() {
         assertTrue(seatingRepository.existsSeatingsById(1));
