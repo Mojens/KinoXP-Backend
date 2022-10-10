@@ -136,12 +136,14 @@ class ReservationServiceTest {
 
 
         //Expected Result
-        int expectedLenght = 16;
         boolean isSameResult = false;
 
-
+        //Here we check if both safetyId's is the lenght of 16
         assertEquals(safetyId1.length(), lengthOfSafetyId);
         assertEquals(safetyId2.length(), lengthOfSafetyId);
+
+
+        //Here we check if the safetyID's is the same. They should not be.
         assertEquals(isSame, isSameResult);
     }
 
