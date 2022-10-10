@@ -44,8 +44,8 @@ public class EmployeeService {
         Employee foundEmployee = employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with ID: "+id+", cannot be found"));
 
         foundEmployee.setName(employeeRequest.getName());
-        foundEmployee.setUserName(BCrypt.hashpw(employeeRequest.getUserName(),BCrypt.gensalt()));
-        foundEmployee.setPassword(employeeRequest.getPassword());
+        foundEmployee.setPassword(BCrypt.hashpw(employeeRequest.getPassword(),BCrypt.gensalt()));
+        foundEmployee.setUserName(employeeRequest.getUserName());
 
         employeeRepository.save(foundEmployee);
     }
