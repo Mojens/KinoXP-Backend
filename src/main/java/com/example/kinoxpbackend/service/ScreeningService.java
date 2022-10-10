@@ -1,16 +1,20 @@
 package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.dto.EmployeeResponse;
+import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
-import com.example.kinoxpbackend.entity.Screening;
-import com.example.kinoxpbackend.entity.Shift;
+import com.example.kinoxpbackend.entity.*;
 import com.example.kinoxpbackend.repository.MovieRepository;
+import com.example.kinoxpbackend.repository.ReservationRepository;
 import com.example.kinoxpbackend.repository.ScreeningRepository;
 import com.example.kinoxpbackend.repository.TheaterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,23 +22,24 @@ public class ScreeningService {
     private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
     private final TheaterRepository theaterRepository;
+    private final ReservationRepository reservationRepository;
 
-    public ScreeningService(ScreeningRepository screeningRepository, MovieRepository movieRepository, TheaterRepository theaterRepository) {
+    public ScreeningService(ScreeningRepository screeningRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, ReservationRepository reservationRepository) {
         this.screeningRepository = screeningRepository;
         this.movieRepository = movieRepository;
         this.theaterRepository = theaterRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     // GetAll screenings
     public List<ScreeningResponse> getAllScreenings() {
         List<Screening> screeningList = screeningRepository.findAll();
-        if (screeningList.size() < 1){
+        if (screeningList.size() < 1) {
             System.out.println("No list");
-        }
-        else if (screeningList.size() > 1) {
+        } else if (screeningList.size() > 1) {
             System.out.println("There is a List");
-            for (Screening s: screeningList
-                 ) {
+            for (Screening s : screeningList
+            ) {
                 System.out.println(s);
             }
         }
@@ -42,6 +47,7 @@ public class ScreeningService {
 
         return screeningList.stream().map(screening -> new ScreeningResponse(screening)).toList();
     }
+
     // get screening by id
     public ScreeningResponse getScreeningById(@PathVariable int id) {
         return new ScreeningResponse(screeningRepository.findById(id).orElseThrow(() -> new RuntimeException("Screening not found")));
@@ -55,7 +61,7 @@ public class ScreeningService {
         Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
         newScreening = screeningRepository.save(newScreening);
 
-        //Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+
         screeningRepository.save(newScreening);
 
 
@@ -80,4 +86,86 @@ public class ScreeningService {
         }
         screeningRepository.deleteById(id);
     }
+
+    // add all screenings to movie between two dates
+    public ScreeningResponse addScreeningsToMovie(ScreeningRequest screeningRequest) {
+        if (screeningRepository.existsScreeningById(screeningRequest.getId())) {
+            throw new RuntimeException("Screening with this ID already exist");
+        }
+
+        Screening newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+        // get movie showStart and showEnd
+        Movie movie = movieRepository.findById(screeningRequest.getMovieId()).orElseThrow(() -> new RuntimeException("Movie not found"));
+        LocalDate showStart = movie.getShowStartDate();
+        LocalDate showEnd = movie.getShowEndDate();
+        // difference between showStart and showEnd
+        int days = showEnd.getDayOfYear() - showStart.getDayOfYear();
+
+        for (int i = 0; i < days; i++) {
+
+            newScreening.setStartTime(newScreening.getStartTime().plusDays(i));
+            newScreening.setEndTime(newScreening.getEndTime().plusDays(i));
+            screeningRepository.save(newScreening);
+            newScreening = ScreeningRequest.getScreeningEntity(screeningRequest);
+
+        }
+
+        return new ScreeningResponse(newScreening);
+    }
+
+    // find all booked seats for a specific screening and return number of booked seats
+    public int getNumberOfReservations(int screeningId) {
+        List<Reservation> reservations = reservationRepository.findAll();
+        List<Reservation> reservationsForScreening = new ArrayList<>();
+        List<SeatChoice> seatChoices = new ArrayList<>();
+
+        for (Reservation r : reservations
+        ) {
+            if (r.getScreening().getId() == screeningId) {
+                reservationsForScreening.add(r);
+            }
+        }
+        for (Reservation r : reservationsForScreening
+        ) {
+            seatChoices.addAll(r.getSeatChoices());
+
+        }
+        return seatChoices.size();
+
+
+    }
+
+
+    public void updatePerformance(int id) {
+        Screening screening = screeningRepository.findById(id).orElseThrow(() -> new RuntimeException("Screening not found"));
+        int seatsBooked = getNumberOfReservations(id);
+        Theater theater = theaterRepository.findById(screening.getTheater().getId()).orElseThrow(() -> new RuntimeException("Theater not found"));
+
+        int performance;
+        if (theater.getId() == 1) {
+            performance = (seatsBooked * 100) / 240;
+
+        } else {
+            performance = (seatsBooked * 100) / 400;
+
+        }
+        screening.setPerformance(performance);
+        screeningRepository.save(screening);
+
+    }
+
+
+
+
+    public void updateAllPerformance() {
+        List<Screening> screenings = screeningRepository.findAll();
+        for (Screening s : screenings
+        ) {
+            updatePerformance(s.getId());
+        }
+
+    }
+
+
+
 }

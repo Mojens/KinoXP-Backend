@@ -155,9 +155,9 @@ public class Setup implements ApplicationRunner {
 
 
         // add screenings
-        Screening screening = new Screening(10, LocalDateTime.of(2022, 10, 10, 20, 25), LocalDateTime.of(2022, 10, 10, 23, 55), movie2, theater);
-        Screening screening2 = new Screening(40, LocalDateTime.of(2022, 10, 11, 20, 20), LocalDateTime.of(2022, 11, 11, 23, 10), movie, theater2);
-        Screening screening3 = new Screening(30, LocalDateTime.of(2022, 10, 12, 20, 15), LocalDateTime.of(2022, 12, 11, 23, 1), movie2, theater);
+        Screening screening = new Screening(0.0, LocalDateTime.of(2022, 10, 10, 20, 25), LocalDateTime.of(2022, 10, 10, 23, 55), movie2, theater);
+        Screening screening2 = new Screening(0.0, LocalDateTime.of(2022, 10, 11, 20, 20), LocalDateTime.of(2022, 11, 11, 23, 10), movie, theater2);
+        Screening screening3 = new Screening(0.0, LocalDateTime.of(2022, 10, 12, 20, 15), LocalDateTime.of(2022, 12, 11, 23, 1), movie2, theater);
 
 
         screeningRepository.save(screening);
@@ -169,30 +169,30 @@ public class Setup implements ApplicationRunner {
 
         Employee employee1 = Employee.builder()
                 .name("Jens")
-                .type(3)
+                .type(1)
                 .password("test123")
                 .userName("JensAdmin")
                 .build();
 
         Employee employee3 = Employee.builder()
                 .name("Simon")
-                .type(2)
+                .type(1)
                 .password("test123")
                 .userName("SimonOlsen")
                 .build();
 
         Employee employee2 = Employee.builder()
                 .name("Mo")
-                .type(1)
+                .type(2)
                 .password("test321")
                 .userName("MoCasual")
                 .build();
 
-        Shift shift1 = Shift.builder()
-                .startTime(LocalDateTime.now())
-                .endTime(LocalDateTime.now().plusHours(8))
-                .employee(employee1)
-                .build();
+      Shift shift1 = Shift.builder()
+          .startTime(LocalDateTime.of(2022,10,10,9,0))
+          .endTime(LocalDateTime.of(2022,10,10,17,0))
+          .employee(employee1)
+          .build();
 
         Shift shift2 = Shift.builder()
                 .startTime(LocalDateTime.now().plusHours(8))
@@ -221,17 +221,17 @@ public class Setup implements ApplicationRunner {
 
         SeatChoice seatChoice2 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(10))
-                .reservation(reservationRepository.getReservationById(2))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice3 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(1))
-                .reservation(reservationRepository.getReservationById(3))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         SeatChoice seatChoice4 = SeatChoice.builder()
                 .seatings(seatRepository.getSeatingById(2))
-                .reservation(reservationRepository.getReservationById(3))
+                .reservation(reservationRepository.getReservationById(1))
                 .build();
 
         seatChoiceRepository.save(seatChoice1);

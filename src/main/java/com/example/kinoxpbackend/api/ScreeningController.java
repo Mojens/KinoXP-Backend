@@ -1,5 +1,6 @@
 package com.example.kinoxpbackend.api;
 
+import com.example.kinoxpbackend.dto.MovieRequest;
 import com.example.kinoxpbackend.dto.ScreeningRequest;
 import com.example.kinoxpbackend.dto.ScreeningResponse;
 import com.example.kinoxpbackend.service.ScreeningService;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -22,12 +22,19 @@ public class ScreeningController {
     // Get all screenings
     @GetMapping
     public List<ScreeningResponse> getScreenings() {
+
+        // update performance on all screenings
+
+        screeningService.updateAllPerformance();
+
+
         return screeningService.getAllScreenings();
     }
 
     // Get screening by id
     @GetMapping(path = "/{id}")
     public ScreeningResponse getScreeningById(@PathVariable int id) throws Exception {
+        screeningService.updatePerformance(id);
         return screeningService.getScreeningById(id);
     }
 
@@ -49,6 +56,12 @@ public class ScreeningController {
     ResponseEntity<Boolean> deleteScreening(@PathVariable int id) {
          screeningService.deleteScreening(id);
             return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/all")
+    public ScreeningResponse addMultiScreening(@RequestBody ScreeningRequest screening) {
+
+        return screeningService.addScreeningsToMovie(screening);
     }
 
 

@@ -45,6 +45,7 @@ class SeatingRepositoryTest {
         seatingRepository.save(seat3);
     }
 
+
     @Test
     void existsSeatingsById() {
         assertTrue(seatingRepository.existsSeatingsById(1));

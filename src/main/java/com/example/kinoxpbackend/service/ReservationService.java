@@ -33,6 +33,8 @@ public class ReservationService {
 
 
 
+
+
     public List<ReservationResponse> findReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
@@ -83,7 +85,7 @@ public class ReservationService {
     }
 
 
-    private String getSafetyId(int lenght){
+    public String getSafetyId(int lenght){
         Random random = new Random();
         String safetyId;
         do {

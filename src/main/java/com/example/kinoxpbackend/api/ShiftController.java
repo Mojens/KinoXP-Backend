@@ -36,9 +36,8 @@ public class ShiftController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     void addShift(@RequestBody ShiftRequest e){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        LocalDateTime startTimeDate = LocalDateTime.parse(e.getStartTime(),formatter);
-        LocalDateTime endTimeDate = LocalDateTime.parse(e.getEndTime(),formatter);
+        LocalDateTime startTimeDate = LocalDateTime.parse(e.getStartTime());
+        LocalDateTime endTimeDate = LocalDateTime.parse(e.getEndTime());
         shiftService.addShift(e.getEmployeeId(),startTimeDate,endTimeDate);
     }
 

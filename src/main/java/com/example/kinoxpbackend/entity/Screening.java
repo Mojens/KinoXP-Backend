@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 
 public class Screening {
 
@@ -37,15 +38,7 @@ public class Screening {
     @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
-    public Screening(int id, double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater, List<Reservation> reservations) {
-        this.id = id;
-        this.performance = performance;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.movie = movie;
-        this.theater = theater;
-        this.reservations = reservations;
-    }
+
 
     public Screening(double performance, LocalDateTime startTime, LocalDateTime endTime, Movie movie, Theater theater) {
         this.performance = performance;
@@ -68,4 +61,5 @@ public class Screening {
         this.theater = theater;
 
     }
+
 }
