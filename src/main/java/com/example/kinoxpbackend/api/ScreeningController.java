@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -36,8 +35,6 @@ public class ScreeningController {
     @GetMapping(path = "/{id}")
     public ScreeningResponse getScreeningById(@PathVariable int id) throws Exception {
         screeningService.updatePerformance(id);
-        screeningService.setWeeklyPerformance(id);
-        System.out.println("Weekly Performance = " + screeningService.getWeeklyPerformance(id));
         return screeningService.getScreeningById(id);
     }
 

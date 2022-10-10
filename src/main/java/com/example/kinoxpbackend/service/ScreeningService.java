@@ -166,36 +166,6 @@ public class ScreeningService {
 
     }
 
-    // get average performance for a specific movie last 7 days
-    public int getWeeklyPerformance(int movieId) {
-        List<Screening> screenings = screeningRepository.findAll();
-        List<Screening> screeningsForMovie = new ArrayList<>();
-        List<Double> performances = new ArrayList<>();
-        for (Screening s : screenings
-        ) {
-            if (s.getMovie().getId() == movieId) {
-                screeningsForMovie.add(s);
-            }
-        }
-        for (Screening s : screeningsForMovie
-        ) {
-            if (s.getStartTime().isAfter(LocalDateTime.now().minusDays(7))) {
-                performances.add(s.getPerformance());
-            }
-        }
-        int sum = 0;
-        for (double i : performances
-        ) {
-            sum += i;
-        }
-        return sum / performances.size();
-    }
 
-    // set weeklyPerformance for a specific movie
-    public void setWeeklyPerformance(int movieId) {
-        Screening screening = screeningRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
-        screening.setWeeklyPerformance(getWeeklyPerformance(movieId));
-        movieRepository.save(screening.getMovie());
-    }
 
 }

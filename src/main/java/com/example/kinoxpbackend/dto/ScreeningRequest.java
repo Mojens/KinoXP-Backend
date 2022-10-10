@@ -18,7 +18,6 @@ import java.util.List;
 public class ScreeningRequest {
 
     private int id;
-    private double weeklyPerformance;
     private double performance;
 
     private LocalDateTime startTime;
@@ -28,7 +27,6 @@ public class ScreeningRequest {
 
     public ScreeningRequest(Screening screening) {
         this.id = screening.getId();
-        this.weeklyPerformance = screening.getWeeklyPerformance();
         this.performance = screening.getPerformance();
         this.startTime = screening.getStartTime();
         this.endTime = screening.getEndTime();
@@ -39,7 +37,6 @@ public class ScreeningRequest {
     public static Screening getScreeningEntity(ScreeningRequest s){
         return Screening.builder()
                 .id(s.getId())
-                .weeklyPerformance(s.getWeeklyPerformance())
                 .performance(s.getPerformance())
                 .startTime(s.getStartTime())
                 .endTime(s.getEndTime())
