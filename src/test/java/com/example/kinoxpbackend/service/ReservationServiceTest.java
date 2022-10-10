@@ -21,7 +21,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ReservationServiceTest {
-/*
+
 
     public static ReservationRepository reservationRepository;
 
@@ -169,5 +169,5 @@ class ReservationServiceTest {
         assertEquals(sizeAfter, expectedAfter);
     }
 
- */
+
 }
