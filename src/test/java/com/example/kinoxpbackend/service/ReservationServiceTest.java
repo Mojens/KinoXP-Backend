@@ -91,7 +91,7 @@ class ReservationServiceTest {
 
 
 
-
+/*
     @Test
     void addReservation() {
         String email = "tester@test.com";
@@ -168,4 +168,6 @@ class ReservationServiceTest {
         assertEquals(sizeBefore, expectedBefore);
         assertEquals(sizeAfter, expectedAfter);
     }
+
+ */
 }
