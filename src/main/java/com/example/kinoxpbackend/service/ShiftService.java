@@ -58,7 +58,6 @@ public class ShiftService {
         foundShift.setEndTime(shiftRequest.getEndTime());
         foundShift.setEmployee(foundEmployee);
 
-
         shiftRepository.save(foundShift);
     }
 

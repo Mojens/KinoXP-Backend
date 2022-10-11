@@ -8,8 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -36,8 +34,6 @@ public class ShiftController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     void addShift(@RequestBody ShiftRequest e){
-        //LocalDateTime startTimeDate = LocalDateTime.parse(e.getStartTime());
-        //LocalDateTime endTimeDate = LocalDateTime.parse(e.getEndTime());
         shiftService.addShift(e.getEmployeeId(),e.getStartTime(),e.getEndTime());
     }
 

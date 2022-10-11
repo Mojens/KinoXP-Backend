@@ -32,6 +32,8 @@ class ShiftServiceTest {
 
     Shift shift;
 
+    ShiftRequest shiftRequest;
+
 
     @BeforeEach
     public void setUpData(@Autowired ShiftRepository shiftRepository, @Autowired EmployeeRepository employeeRepository) {
@@ -80,9 +82,12 @@ class ShiftServiceTest {
 
         shiftRepository.save(shift1);
         shiftRepository.save(shift2);
+        shiftRepository.save(shift3);
         shift = shift3;
 
         shiftService = new ShiftService(shiftRepository, employeeRepository);
+
+        shiftRequest = new ShiftRequest(shift1);
     }
 
     @Test
@@ -103,10 +108,10 @@ class ShiftServiceTest {
     }
 
     @Test
-    void editShift() {
-        Shift shiftToEdit = shiftRepository.getById(1);
-
-
+    void editShift() throws Exception {
+        shiftService.editShift(shiftRequest, 3);
+        assertEquals(shift.getStartTime(), LocalDateTime.of(2022, 9, 10, 23, 32, 32));
+        assertEquals(shift.getEndTime(), LocalDateTime.of(2022, 9, 18, 23, 32, 32));
     }
 
     @Test
