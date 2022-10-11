@@ -121,7 +121,7 @@ class ShiftServiceTest {
     }
 
     @Test
-    void editShift() throws Exception {
+    void editShift() {
         shiftService.editShift(shiftRequest, 3);
         List<ShiftResponse> shiftResponses = shiftService.getShifts();
         assertEquals(LocalDateTime.of(2022, 9, 10, 23, 32, 32), shiftResponses.get(2).getStartTime());

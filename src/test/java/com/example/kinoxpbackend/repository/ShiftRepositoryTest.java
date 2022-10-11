@@ -13,19 +13,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ShiftRepositoryTest {
 
-    @Autowired
-    ShiftRepository shiftRepository;
-    @Autowired
-    EmployeeRepository employeeRepository;
+
+    static ShiftRepository shiftRepository;
+
+    static EmployeeRepository employeeRepository;
 
     static Employee employee;
     static String shiftId1;
     static String shiftId2;
 
     @BeforeAll
-    public static void setUpData(@Autowired ShiftRepository shiftRepository,@Autowired EmployeeRepository employeeRepository){
+    public static void setUpData(@Autowired ShiftRepository shift_Repository,@Autowired EmployeeRepository employee_Repository){
+
+        shiftRepository = shift_Repository;
+        employeeRepository = employee_Repository;
 
     Employee s1 = Employee.builder()
+            .id(1)
             .name("simon")
             .password("hej123")
             .userName("helokity")
@@ -34,12 +38,17 @@ class ShiftRepositoryTest {
     employee = s1;
 
     Shift shift1 = Shift.builder()
+            .id(1)
             .startTime(LocalDateTime.of(2022, 9, 10,23,32,32))
             .endTime(LocalDateTime.of(2022, 9, 18,23,32,32))
             .employee(employee)
             .build();
 
     shiftRepository.save(shift1);
+
+    if (shiftRepository.findAll().size() > 1) {
+
+    }
     }
 
     @Test
