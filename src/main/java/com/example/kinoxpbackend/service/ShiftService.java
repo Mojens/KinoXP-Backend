@@ -52,12 +52,10 @@ public class ShiftService {
         Shift foundShift = shiftRepository.findById(shiftId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shift with ID: " + shiftId + ", cannot be found"));
 
 
-        LocalDateTime startTimeDate = LocalDateTime.parse(shiftRequest.getStartTime());
-        LocalDateTime endTimeDate = LocalDateTime.parse(shiftRequest.getEndTime());
         Employee foundEmployee = employeeRepository.findById(shiftRequest.getEmployeeId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with ID: " + shiftRequest.getEmployeeId() + ", cannot be found"));
 
-        foundShift.setStartTime(startTimeDate);
-        foundShift.setEndTime(endTimeDate);
+        foundShift.setStartTime(shiftRequest.getStartTime());
+        foundShift.setEndTime(shiftRequest.getEndTime());
         foundShift.setEmployee(foundEmployee);
 
 

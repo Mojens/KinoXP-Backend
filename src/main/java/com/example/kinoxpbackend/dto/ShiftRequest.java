@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -16,12 +18,16 @@ public class ShiftRequest {
 
   private int id;
 
-  private String startTime;
+  private LocalDateTime startTime;
 
-  private String endTime;
+  private LocalDateTime endTime;
 
   private int employeeId;
 
-  public ShiftRequest(Shift shift2) {
+  public ShiftRequest(Shift s) {
+    this.id = s.getId();
+    this.startTime = s.getStartTime();
+    this.endTime = s.getEndTime();
+    this.employeeId = s.getEmployee().getId();
   }
 }

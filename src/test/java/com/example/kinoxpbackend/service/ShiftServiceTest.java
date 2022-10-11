@@ -104,6 +104,8 @@ class ShiftServiceTest {
 
     @Test
     void editShift() {
+        Shift shiftToEdit = shiftRepository.getById(1);
+
 
     }
 

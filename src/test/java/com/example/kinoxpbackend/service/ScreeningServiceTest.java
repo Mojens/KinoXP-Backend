@@ -62,7 +62,7 @@ class ScreeningServiceTest {
         sc2 = screening2;
         sc3 = screening3;
 
-        screeningService = new ScreeningService(screeningRepository, movieRepository, theaterRepository);
+        //screeningService = new ScreeningService(screeningRepository, movieRepository, theaterRepository);
 
 
     }
