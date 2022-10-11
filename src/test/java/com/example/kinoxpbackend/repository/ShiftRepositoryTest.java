@@ -45,10 +45,6 @@ class ShiftRepositoryTest {
             .build();
 
     shiftRepository.save(shift1);
-
-    if (shiftRepository.findAll().size() > 1) {
-
-    }
     }
 
     @Test
