@@ -2,7 +2,9 @@ package com.example.kinoxpbackend.service;
 
 import com.example.kinoxpbackend.entity.Movie;
 import com.example.kinoxpbackend.repository.MovieRepository;
+import com.example.kinoxpbackend.repository.ScreeningRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,6 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class MovieServiceTest {
 
     public static MovieRepository movieRepository;
+
+    public static ScreeningRepository screeningRepository;
+
+    MovieService movieService;
+
+    static int sizeOfRepo;
 
 
     @BeforeAll
@@ -75,6 +83,12 @@ class MovieServiceTest {
         movies.add(movie3);
 
         movieRepository.saveAll(movies);
+        sizeOfRepo = movieRepository.findAll().size();
+    }
+
+    @BeforeEach
+    public void setMovieServiceUp() {
+        movieService = new MovieService(movieRepository, screeningRepository);
     }
 
     @Test
@@ -83,10 +97,19 @@ class MovieServiceTest {
         int actualResult = movieRepository.findAll().size();
 
         //Excpected result
-        int expectedResult = 3;
+        int expectedResult = sizeOfRepo;
 
         assertEquals(expectedResult, actualResult);
 
+    }
+   @Test
+    void deleteMovie() {
+        int beforeDeleting = movieRepository.findAll().size();
+        int afterDeleting = movieRepository.findAll().size() - 1;
+        //Asserting
+        assertEquals(beforeDeleting, movieRepository.findAll().size());
+       movieRepository.deleteById(2);
+        assertEquals(afterDeleting, movieRepository.findAll().size());
     }
 
     @Test
@@ -117,22 +140,6 @@ class MovieServiceTest {
 
     }
 
-    @Test
-    void deleteMovie() {
-
-        int amountBeforeDeleting = movieRepository.findAll().size();
-        movieRepository.deleteById(1);
-        int amountAfterDeleting = movieRepository.findAll().size();
-
-
-        //ExpectedResults
-        int expectedBeforeDeleting = 3;
-        int expectedAfterDeleting = 2;
-
-        //Asserting
-        assertEquals(amountBeforeDeleting, expectedBeforeDeleting);
-        assertEquals(amountAfterDeleting, expectedAfterDeleting);
-    }
 
     @Test
     void editMovie() {

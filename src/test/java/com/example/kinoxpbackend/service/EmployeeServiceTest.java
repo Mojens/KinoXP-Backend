@@ -15,45 +15,58 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class EmployeeServiceTest {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
 
-    EmployeeService employeeService;
+    static EmployeeRepository employeeRepository;
 
-    Employee employee;
+    static EmployeeService employeeService;
 
-    @BeforeEach
-    public void initData(@Autowired EmployeeRepository employeeRepository) {
+    static Employee employee;
+
+    static int sizeOfRepo;
+
+    @BeforeAll
+    public static void initData(@Autowired EmployeeRepository employee_Repository) {
+        employeeRepository = employee_Repository;
+
         Employee employee1 = Employee.builder()
+                .id(1)
                 .name("Jan")
                 .password("JanERSej")
-                .userName("JanMandenSSX")
+                .userName("janmandenssx")
                 .type(1)
+                .shifts(new ArrayList<>())
                 .build();
         Employee employee2 = Employee.builder()
+                .id(2)
                 .name("Hans")
                 .password("HansERSej")
-                .userName("HanseManden123")
+                .userName("hansemanden123")
                 .type(2)
+                .shifts(new ArrayList<>())
                 .build();
         Employee employee3 = Employee.builder()
+                .id(3)
                 .name("Jytte")
                 .password("Jytte1111")
-                .userName("JytteHelgen")
+                .userName("jyttehelgen")
                 .type(2)
+                .shifts(new ArrayList<>())
                 .build();
         Employee employee4 = Employee.builder()
                 .name("Ole")
                 .password("Ole1234")
-                .userName("OleHansen")
+                .userName("olehansen")
                 .type(1)
+                .shifts(new ArrayList<>())
                 .build();
 
         employeeRepository.save(employee1);
@@ -61,23 +74,26 @@ class EmployeeServiceTest {
         employeeRepository.save(employee3);
         employee = employee4;
 
-
-        employeeService = new EmployeeService(employeeRepository);
+        sizeOfRepo = employeeRepository.findAll().size();
     }
 
+    @BeforeEach
+    public void setEmployeeServiceUp(){
+        employeeService = new EmployeeService(employeeRepository);
+    }
     @Test
     void getEmployees() {
         List<Employee> listOfEmployees = employeeRepository.findAll();
         List<EmployeeResponse> foundEmployees = listOfEmployees.stream().map(employee -> new EmployeeResponse(employee, false)).toList();
-        assertEquals(3, foundEmployees.size());
-        assertNotEquals(4, foundEmployees.size());
+        assertEquals(listOfEmployees.size(), foundEmployees.size());
+        assertNotEquals(listOfEmployees.size()+1, foundEmployees.size());
     }
 
     @Test
     void findById() throws Exception {
         EmployeeResponse employeeResponse = employeeService.findById(2);
         assertEquals("Hans", employeeResponse.getName());
-        assertEquals("HanseManden123", employeeResponse.getUserName());
+        assertEquals("hansemanden123", employeeResponse.getUserName().toLowerCase());
     }
 
     @Test
@@ -85,8 +101,9 @@ class EmployeeServiceTest {
         EmployeeRequest employeeRequest = new EmployeeRequest(employee);
         employeeService.addEmployee(employeeRequest);
         List<EmployeeResponse> employeeResponses = employeeService.getEmployees();
-        assertEquals(4, employeeResponses.size());
-        assertEquals("OleHansen", employeeResponses.get(3).getUserName());
+        assertEquals(sizeOfRepo + 1, employeeResponses.size());
+        assertEquals("olehansen", employeeResponses.get(3).getUserName());
+
     }
 
     @Test
@@ -94,7 +111,7 @@ class EmployeeServiceTest {
         EmployeeRequest employeeRequest = new EmployeeRequest(employee);
         employeeService.editEmployee(employeeRequest, 1);
         List<EmployeeResponse> employeeResponses = employeeService.getEmployees();
-        assertEquals(3, employeeResponses.size());
+        assertEquals(sizeOfRepo, employeeResponses.size());
         assertEquals("Ole", employeeResponses.get(0).getName());
     }
 
@@ -102,14 +119,14 @@ class EmployeeServiceTest {
     void deleteEmployeeById() {
         employeeService.deleteEmployeeById(1);
         List<EmployeeResponse> employeeResponses = employeeService.getEmployees();
-        assertEquals(2, employeeResponses.size());
+        assertEquals(sizeOfRepo - 1, employeeResponses.size());
         assertEquals("Hans", employeeResponses.get(0).getName());
     }
 
     @Test
     void employeeLogin() {
         Employee newEmployee = Employee.builder()
-                .userName("JanMandenSSX")
+                .userName("janmandenssx")
                 .password("JanERSej")
                 .build();
         EmployeeRequest newEmployeeRequest = new EmployeeRequest(newEmployee);
@@ -118,7 +135,7 @@ class EmployeeServiceTest {
         Employee employeeToTest = listOfEmployees.get(0);
         EmployeeRequest trueEmployeeRequestToTest = new EmployeeRequest(employeeToTest);
 
-        assertEquals(newEmployeeRequest.getUserName(),trueEmployeeRequestToTest.getUserName());
+        assertEquals(newEmployeeRequest.getUserName(),trueEmployeeRequestToTest.getUserName().toLowerCase(Locale.ROOT));
 
         assertEquals(BCrypt.checkpw("JanERSej",newEmployeeRequest.getPassword()),BCrypt.checkpw("JanERSej",trueEmployeeRequestToTest.getPassword()));;
     }
