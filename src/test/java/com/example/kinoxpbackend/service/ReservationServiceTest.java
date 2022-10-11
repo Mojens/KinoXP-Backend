@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ReservationServiceTest {
 
-//Testing
+//Testing2
     public static ReservationRepository reservationRepository;
 
     public static TheaterRepository theaterRepository;
