@@ -108,7 +108,9 @@ class ScreeningServiceTest {
         screeningService = new ScreeningService(screeningRepository, movieRepository, theaterRepository, reservationRepository);
 
 
-        screeningRepository.deleteById(3);
+        if (screeningRepository.findAll().size() > 2) {
+            screeningRepository.deleteById(3);
+        }
         sizeOfRepo = screeningRepository.findAll().size();
     }
 
