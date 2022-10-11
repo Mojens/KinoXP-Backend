@@ -77,7 +77,7 @@ class ReservationServiceTest {
         screeningRepository.save(screening);
 
         //Creating a few Reservations
-        ArrayList<Reservation> reservations = new ArrayList<Reservation>(
+        ArrayList<Reservation> reservations = new ArrayList<>(
                 Arrays.asList(
                         new Reservation("jan", "61426729", 1, "h", screening),
                         new Reservation("Bo", "61426786", 2, "ui", screening),
