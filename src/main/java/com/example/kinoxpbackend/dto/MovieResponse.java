@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,9 +35,7 @@ public class MovieResponse {
     private LocalDate showEndDate;
 
 
-
     private List<ScreeningResponse> screeningResponse;
-
 
     public MovieResponse(Movie m) {
         this.id = m.getId();
@@ -52,18 +51,16 @@ public class MovieResponse {
         this.trailers = m.getTrailers();
         this.showStartDate = m.getShowStartDate();
         this.showEndDate = m.getShowEndDate();
-        if (m.getScreenings().size() > 0) {
-           screeningResponse = m.getScreenings().stream().map(screenings -> ScreeningResponse.builder()
-                    .id(screenings.getId())
-                    .movieId(screenings.getMovie().getId())
-                   .startTime(screenings.getStartTime())
-                     .endTime(screenings.getEndTime())
-                   .performance(screenings.getPerformance())
-                   .theaterId(screenings.getTheater().getId())
-                   .build()).collect(Collectors.toList());
+        if (m.getScreenings() != null) {
+            this.screeningResponse = m.getScreenings().stream().map(ScreeningResponse::new).collect(Collectors.toList());
+        } else {
+            // set to false if no screenings
+            this.screeningResponse = null;
         }
-    }
+        this.screeningResponse = m.getScreenings().stream().map(ScreeningResponse::new).collect(Collectors.toList());
 
+
+    }
 
 
 }
