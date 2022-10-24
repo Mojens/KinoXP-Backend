@@ -31,7 +31,6 @@ public class MovieService {
     public List<MovieResponse> getAllMovies() {
         return movieRepository.findAll().stream().map(MovieResponse::new).collect(Collectors.toList());
     }
-
     // Get movie by id
     public MovieResponse getMovieById(@PathVariable int id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
